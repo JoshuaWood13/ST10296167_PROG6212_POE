@@ -1,5 +1,68 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<style>
+    h1{
+        font-size: 50px;
+    }
+    h2{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    body {
+        text-align: center;
+    }
+    p{
+        margin-bottom: 5px;
+    }
+    input{
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    select{
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    textarea{
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+    button{
+        margin-top: 0px;
+        font-size: 20px;
+        width: 200px;
+    }
+    #Calculation{
+        color:lawngreen;
+        font-weight:bold;
+    }
+</style>
+
+<h1>Submit Claim</h1>
+<h2>Please enter all relevant claim details</h2>
+<body>
+    <form action="SubmitClaim" method="post">
+        <p>Select Claim Month:</p>
+        <select name="Month" required>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+        <p>Hourly Rate:</p>
+        <input type="number" name="HourlyRate" placeholder="" required />
+        <p>Hours Worked:</p>
+        <input type="number" name="HoursWorked" placeholder="" required />
+        <p>Calculated Claim Amount:</p>
+        <p id="Calculation">R6000 (Example)</p>
+        <p>Description:</p>
+        <textarea name="Description" rows="5" cols="40" placeholder="Enter the description of your claim..." required></textarea>
+        <br /><br/>
+        <button type="submit">Submit Claim</button>
+    </form>
+</body>
