@@ -33,10 +33,23 @@ namespace ST10296167_PROG6212_POE.Controllers
             return View();
         }
 
-        public IActionResult ViewClaim()
+        public IActionResult ViewClaims()
         {
             return View();
         }
+        public IActionResult UploadDocuments()
+        {
+            return View();
+        }
+        public IActionResult VerifyClaims()
+        {
+            return View();
+        }
+        public IActionResult FullClaimView()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

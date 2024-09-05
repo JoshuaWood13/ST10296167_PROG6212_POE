@@ -1,8 +1,46 @@
 ﻿<style>
+    h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+    }
 
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    body {
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+
+    input {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+    .FileUpload{
+        margin-left:190px;
+    }
+    button{
+        margin-top: 15px;
+        width: 200px;
+        font-size: 20px;
+    }
 </style>
 
 <h1>Upload Supporting Documents</h1>
+<h2>Please upload any documents to support your claim</h2>
 <body>
-
+    <p>Link to Claim ID:</p>
+    <input type="number" name="ClaimID" placeholder="" required />
+    <p>Select Document Files:</p>
+    <form action="upload" method="post" enctype="multipart/form-data">
+        <div class="FileUpload">
+            <input type="file" name="Files" multiple />
+        </div>
+        <button type="submit">Submit Files</button>
+    </form>
 </body>

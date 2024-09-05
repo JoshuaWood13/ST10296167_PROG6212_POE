@@ -6,9 +6,68 @@
     body {
         text-align: center;
     }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 </style>
 
 <h1>Current Claims</h1>
 <body>
-
+    <table>
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Claim Month</th>
+                <th>Claim Amount</th>
+                <th>Claim Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>001</td>
+                <td>January</td>
+                <td>R10000.00</td>
+                <td>Approved</td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>February</td>
+                <td>R12000.00</td>
+                <td>Pending</td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>March</td>
+                <td>R13500.00</td>
+                <td>Rejected</td>
+            </tr>
+            <tr>
+                <td>004</td>
+                <td>April</td>
+                <td>R16000.00</td>
+                <td>Approved</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
