@@ -1,46 +1,61 @@
-﻿<style>
-    h1 {
-        font-size: 50px;
-        margin-bottom: 20px;
-    }
+﻿<head>
+    <style>
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-family: 'Eras ITC',sans-serif;
+            color: deeppink;
+        }
 
-    h2 {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
 
-    body {
-        text-align: center;
-    }
+        body {
+            text-align: center;
+            background-color: blanchedalmond;
+        }
 
-    p {
-        margin-bottom: 5px;
-    }
+        p {
+            margin-bottom: 5px;
+            font-family: 'Arial Rounded MT',sans-serif;
+        }
 
-    input {
-        margin-top: 5px;
-        margin-bottom: 20px;
-    }
-    .FileUpload{
-        margin-left:190px;
-    }
-    button{
-        margin-top: 15px;
-        width: 200px;
-        font-size: 20px;
-    }
-</style>
+        input {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        .FileUpload {
+            margin-left: 190px;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 200px;
+            font-size: 20px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            background-color:skyblue;
+        }
+
+        .IDLink {
+            border-radius: 10px;
+        }
+    </style>
+</head>
 
 <h1>Upload Supporting Documents</h1>
 <h2>Please upload any documents to support your claim</h2>
 <body>
     <p>Link to Claim ID:</p>
-    <input type="number" name="ClaimID" placeholder="" required />
+    <input class="IDLink" type="number" name="ClaimID" placeholder="" required />
     <p>Select Document Files:</p>
     <form action="upload" method="post" enctype="multipart/form-data">
         <div class="FileUpload">
             <input type="file" name="Files" multiple />
         </div>
-        <button type="submit">Submit Files</button>
+        <button type="submit"><strong>Submit Files</strong></button>
     </form>
 </body>

@@ -1,39 +1,61 @@
-﻿<style>
-    h1{
-        font-size: 50px;
-    }
-    h2{
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-    body {
-        text-align: center;
-    }
-    p{
-        margin-bottom: 5px;
-    }
-    input{
-        margin-top: 5px;
-        margin-bottom: 10px;
-    }
-    select{
-        margin-top: 5px;
-        margin-bottom: 10px;
-    }
-    textarea{
-        margin-top: 5px;
-        margin-bottom: 0px;
-    }
-    button{
-        margin-top: 0px;
-        font-size: 20px;
-        width: 200px;
-    }
-    #Calculation{
-        color:lawngreen;
-        font-weight:bold;
-    }
-</style>
+﻿<head>
+    <style>
+        h1 {
+            font-size: 50px;
+            font-family:'Eras ITC',sans-serif;
+            color:deeppink;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-family: 'Trebuchet MS',sans-serif;
+        }
+
+        body {
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+
+        p {
+            margin-bottom: 5px;
+            font-family:'Arial Rounded MT',sans-serif;
+           /*  font-family:'Colonna MT'; */
+        }
+
+        input {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        select {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            margin-top: 5px;
+            margin-bottom: 0px;
+            border-radius: 10px;
+        }
+
+        button {
+            margin-top: 0px;
+            font-size: 20px;
+            width: 200px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: skyblue;
+        }
+
+        #Calculation {
+            color: lawngreen;
+            font-weight: bold;
+        }
+    </style>
+</head>
 
 <h1>Submit Claim</h1>
 <h2>Please enter all relevant claim details</h2>
@@ -63,6 +85,6 @@
         <p>Description:</p>
         <textarea name="Description" rows="5" cols="40" placeholder="Enter the description of your claim..." required></textarea>
         <br /><br/>
-        <button type="submit">Submit Claim</button>
+        <button type="submit"><strong>Submit Claim</strong></button>
     </form>
 </body>
