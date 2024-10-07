@@ -5,7 +5,7 @@ namespace ST10296167_PROG6212_POE.Models
     public class ProgrammeCoordinator
     {
         [Key]
-        public int LecturerID { get; set; }
+        public int PM_ID { get; set; }
 
         [Required]
         [StringLength(100)]

@@ -15,11 +15,12 @@ namespace ST10296167_PROG6212_POE.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Login()
-        {
+            // Check if the user is logged in
+            if (HttpContext.Session.GetInt32("IsLoggedIn") != 1)
+            {
+                // If not logged in, redirect to Login
+                return RedirectToAction("Login", "Login");
+            }
             return View();
         }
 

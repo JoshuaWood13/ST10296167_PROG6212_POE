@@ -28,6 +28,12 @@
             border-radius: 10px;
         }
 
+        select {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
         button {
             margin-top: 10px;
             font-size: 20px;
@@ -41,8 +47,14 @@
 <h1>Login</h1>
 <body>
     <form action="LoginUser" method="post">
-        <p>Account Number:</p>
-        <input type="text" name="AccountNumber" placeholder="" required />
+        <p>Select Account Type:</p>
+        <select name="Account" required>
+            <option value="Academic Manager">Academic Manager</option>
+            <option value="Lecturer">Lecturer</option>
+            <option value="Programme Coordinator">Programme Coordinator</option>
+        </select>
+        <p>Account ID:</p>
+        <input type="number" name="AccountID" placeholder="" required />
         <p>Password:</p>
         <input type="text" name="Password" placeholder="" required />
         <p></p>
