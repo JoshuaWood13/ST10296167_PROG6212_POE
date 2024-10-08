@@ -20,7 +20,9 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
         public async Task<IActionResult> ViewClaims()
         {
-            var claims = await _context.Claims.ToListAsync();
+            var lecturerID = HttpContext.Session.GetInt32("AccountID");
+
+            var claims = await _context.Claims.Where(c => c.LecturerID == lecturerID).ToListAsync();
             return View(claims);
         }
 
@@ -44,7 +46,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             await _context.Claims.AddAsync(claim);
             await _context.SaveChangesAsync();
 
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

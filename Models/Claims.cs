@@ -36,5 +36,24 @@ namespace ST10296167_PROG6212_POE.Models
 
         public Lecturers Lecturers { get; set; }  // Navigation property to the Lecturers model
 
+
+        public string Status
+        {
+            get
+            {
+                if (ApprovalPC == 0 && ApprovalAM == 0)
+                    return "Pending (0/2)";
+                else if (ApprovalPC == 2)
+                    return "Rejected";
+                else if (ApprovalPC == 1 && ApprovalAM == 0)
+                    return "Pending (1/2)";
+                else if (ApprovalPC == 1 && ApprovalAM == 1)
+                    return "Approved";
+                else if (ApprovalPC == 1 && ApprovalAM == 2)
+                    return "Rejected";
+                else
+                    return "Error"; // Handle any unexpected cases
+            }
+        }
     }
 }
