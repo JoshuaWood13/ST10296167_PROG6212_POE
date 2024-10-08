@@ -30,7 +30,7 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginUser(string Account, string AccountID, string Password)
+        public IActionResult LoginUser(string Account, int AccountID, string Password)
         {
             // Validate user credentials
             bool loginSuccessful = ValidateUser(Account, AccountID, Password);
@@ -40,6 +40,7 @@ namespace ST10296167_PROG6212_POE.Controllers
                 // Set session variable
                 HttpContext.Session.SetString("AccountType", Account);
                 HttpContext.Session.SetInt32("IsLoggedIn", 1);
+                HttpContext.Session.SetInt32("AccountID", AccountID);
 
                 // Redirect to a dashboard or home page
                 return RedirectToAction("Index", "Home");
@@ -50,26 +51,26 @@ namespace ST10296167_PROG6212_POE.Controllers
             return View("Login");
         }
 
-        private bool ValidateUser(string accountType, string accountNumber, string password)
+        private bool ValidateUser(string accountType, int accountID, string password)
         {
 
             if (accountType == "Lecturer")
             {
-                var sqlQuery = $"SELECT * FROM Lecturers WHERE LecturerID = {accountNumber} AND Password = '{password}'";
+                var sqlQuery = $"SELECT * FROM Lecturers WHERE LecturerID = {accountID} AND Password = '{password}'";
                 // Execute the SQL query
                 var user = _context.Lecturers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
                 return user != null;
             }
             else if (accountType == "Academic Manager")
             {
-                var sqlQuery = $"SELECT * FROM AcademicManagers WHERE AM_ID = {accountNumber} AND Password = '{password}'";
+                var sqlQuery = $"SELECT * FROM AcademicManagers WHERE AM_ID = {accountID} AND Password = '{password}'";
                 // Execute the SQL query
                 var user = _context.AcademicManagers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
                 return user != null;
             }
             else if (accountType == "Programme Coordinator")
             {
-                var sqlQuery = $"SELECT * FROM ProgrammeCoordinators WHERE PD_ID = {accountNumber} AND Password = '{password}'";
+                var sqlQuery = $"SELECT * FROM ProgrammeCoordinators WHERE PD_ID = {accountID} AND Password = '{password}'";
                 // Execute the SQL query
                 var user = _context.ProgrammeCoordinators.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
                 return user != null;

@@ -1,4 +1,6 @@
-﻿<head>
+﻿@model List<ST10296167_PROG6212_POE.Models.Claims>
+
+<head>
     <style>
         h1 {
             font-size: 50px;
@@ -49,6 +51,15 @@
             </tr>
         </thead>
         <tbody>
+            @foreach(var claim in Model)
+            {
+                <tr>
+                    <td>001</td>
+                    <td>January</td>
+                    <td>R10000.00</td>
+                    <td>Approved</td>
+                </tr>
+            }
             <tr>
                 <td>001</td>
                 <td>January</td>

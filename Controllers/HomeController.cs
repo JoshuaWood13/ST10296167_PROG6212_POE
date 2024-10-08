@@ -24,15 +24,15 @@ namespace ST10296167_PROG6212_POE.Controllers
             return View();
         }
 
-        public IActionResult SubmitClaim()
-        {
-            return View();
-        }
+        //public IActionResult SubmitClaim()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult ViewClaims()
-        {
-            return View();
-        }
+        //public IActionResult ViewClaims()
+        //{
+        //    return View();
+        //}
         public IActionResult UploadDocuments()
         {
             return View();

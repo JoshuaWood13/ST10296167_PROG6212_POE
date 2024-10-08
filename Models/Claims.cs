@@ -24,7 +24,7 @@ namespace ST10296167_PROG6212_POE.Models
         public double ClaimAmount { get; set; }
 
         [Required]
-        public DateTime ClaimMonth { get; set; }
+        public string ClaimMonth { get; set; }
 
         public string Description { get; set; }
 

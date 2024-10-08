@@ -1,4 +1,10 @@
-﻿<head>
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var accountType = Context.Session.GetString("AccountType");
+    var accountID = Context.Session.GetInt32("AccountID");
+}
+
+<head>
     <style>
         h1 {
             font-size: 50px;
@@ -32,13 +38,24 @@
 
 <body>
     <h1>Home</h1>
-    <h2>Welcome UserName</h2>
-    <br />
-    <p>Feel free to use any of the following functionality:</p>
-    <ul>
-        <li><a href="">Example functionality for user</a></li>
-        <li><a href="">Example functionality for user</a></li>
-        <li><a href="">Example functionality for user</a></li>
-
-    </ul>
+    @if(@accountType.Equals("Lecturer"))
+    {
+        <h2>Welcome Lecturer: @accountID</h2>
+        <br />
+        <p>Feel free to use any of the following functionality:</p>
+        <ul>
+            <li><a href="">Submit a Claim</a></li>
+            <li><a href="">Upload Supporting Documents for a Claim</a></li>
+            <li><a href="">Track Claim Status</a></li>
+        </ul>
+    }
+    else
+    {
+        <h2>Welcome @accountType: @accountID</h2>
+        <br />
+        <p>Feel free to use any of the following functionality:</p>
+        <ul>
+            <li><a href="">Verify Lecturer Claims</a></li>
+        </ul>
+    }
 </body>
