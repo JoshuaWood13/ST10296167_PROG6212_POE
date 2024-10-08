@@ -56,24 +56,33 @@ namespace ST10296167_PROG6212_POE.Controllers
 
             if (accountType == "Lecturer")
             {
-                var sqlQuery = $"SELECT * FROM Lecturers WHERE LecturerID = {accountID} AND Password = '{password}'";
-                // Execute the SQL query
-                var user = _context.Lecturers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
-                return user != null;
+                var lecturer = _context.Lecturers
+                    .FirstOrDefault(l => l.LecturerID == accountID && l.Password == password);
+                return lecturer != null;
+                //var sqlQuery = $"SELECT * FROM Lecturers WHERE LecturerID = {accountID} AND Password = '{password}'";
+                //// Execute the SQL query
+                //var user = _context.Lecturers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
+                //return user != null;
             }
             else if (accountType == "Academic Manager")
             {
-                var sqlQuery = $"SELECT * FROM AcademicManagers WHERE AM_ID = {accountID} AND Password = '{password}'";
-                // Execute the SQL query
-                var user = _context.AcademicManagers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
-                return user != null;
+                var academicManager = _context.AcademicManagers
+                    .FirstOrDefault(am => am.AM_ID == accountID && am.Password == password);
+                return academicManager != null;
+                //var sqlQuery = $"SELECT * FROM AcademicManagers WHERE AM_ID = {accountID} AND Password = '{password}'";
+                //// Execute the SQL query
+                //var user = _context.AcademicManagers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
+                //return user != null;
             }
             else if (accountType == "Programme Coordinator")
             {
-                var sqlQuery = $"SELECT * FROM ProgrammeCoordinators WHERE PD_ID = {accountID} AND Password = '{password}'";
-                // Execute the SQL query
-                var user = _context.ProgrammeCoordinators.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
-                return user != null;
+                var programmeCoordinator = _context.ProgrammeCoordinators
+                    .FirstOrDefault(pm => pm.PM_ID == accountID && pm.Password == password);
+                return programmeCoordinator != null;
+                //var sqlQuery = $"SELECT * FROM ProgrammeCoordinators WHERE PD_ID = {accountID} AND Password = '{password}'";
+                //// Execute the SQL query
+                //var user = _context.ProgrammeCoordinators.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
+                //return user != null;
             }
 
             return false; // Return true if user exists
