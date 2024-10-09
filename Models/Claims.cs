@@ -36,6 +36,8 @@ namespace ST10296167_PROG6212_POE.Models
 
         public Lecturers Lecturers { get; set; }  // Navigation property to the Lecturers model
 
+        public ICollection<Documents> Documents { get; set; }  // Navigation property to access related documents
+
 
         public string Status
         {
@@ -52,7 +54,7 @@ namespace ST10296167_PROG6212_POE.Models
                 else if (ApprovalPC == 1 && ApprovalAM == 2)
                     return "Rejected";
                 else
-                    return "Error"; // Handle any unexpected cases
+                    return "Error"; 
             }
         }
     }

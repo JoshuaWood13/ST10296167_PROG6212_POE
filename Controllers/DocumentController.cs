@@ -28,7 +28,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             var claim = await _context.Claims.FindAsync(ClaimID);
             if (claim == null || claim.LecturerID != lecturerID)
             {
-                TempData["Error"] = "Selected Claim does not exist or you do not have permission to upload files to this claim";
+                TempData["Error"] = $"Claim <{ClaimID}> does not exist, or you do not have permission to upload files to this Claim";
                 return View("UploadDocuments");
             }
 

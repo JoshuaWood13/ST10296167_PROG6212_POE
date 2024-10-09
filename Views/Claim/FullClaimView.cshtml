@@ -1,0 +1,57 @@
+﻿@model ST10296167_PROG6212_POE.Models.Claims
+
+<head>
+    <style>
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-family: 'Eras ITC',sans-serif;
+            color: deeppink;
+        }
+
+        body {
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+
+        button {
+            border-radius: 5px;
+            font-size: 20px;
+            width: 100px;
+            background-color: skyblue;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Claim @Model.ClaimID</h1>
+
+    <p><strong>Claim Month: </strong>@Model.ClaimMonth</p>
+    <p><strong>Hourly Rate: </strong>R @Model.HourlyRate</p>
+    <p><strong>Hours Worked: </strong>@Model.HoursWorked</p>
+    <p><strong>Claim Amount: </strong>R @Model.ClaimAmount</p>
+    <p><strong>Additional notes:</strong></p>
+    <p>@Model.Description</p>
+    <p><strong>Supporting Documentation:</strong></p>
+    @if (Model.Documents != null && Model.Documents.Any())
+    {
+        <ul>
+            @foreach (var doc in Model.Documents)
+            {
+                <li>@doc.FileName</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No supporting documents were uploaded.</p>
+    }
+    <form method="post" asp-action="ReturnToVerifyClaims">
+        <button type="submit">Return</button>
+    </form>
+</body>

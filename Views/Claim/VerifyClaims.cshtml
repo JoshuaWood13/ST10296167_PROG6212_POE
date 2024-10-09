@@ -1,0 +1,128 @@
+﻿@model List<ST10296167_PROG6212_POE.Models.Claims>
+
+<head>
+    <style>
+        h1 {
+            font-size: 50px;
+            font-family: 'Eras ITC',sans-serif;
+            color: deeppink;
+        }
+
+        body {
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color:deepskyblue;
+            font-weight: bold;
+        }
+
+        tr {
+            background-color: white;
+        }
+
+        .process-button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+            .process-button.deny {
+                background-color: #dc3545;
+            }
+    </style>
+
+</head>
+
+<body>
+    <h1>Outstanding Claims</h1>
+    @if (Model == null || !Model.Any())
+    {
+        <p>There are currently no outstanding claims.</p>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Claim ID</th>
+                    <th>Lecturer ID</th>
+                    <th>Claim Amount</th>
+                    <th>Claim Month</th>
+                    <th>Verify</th>
+                    <th>Process</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@claim.ClaimID</td>
+                        <td>@claim.LecturerID</td>
+                        <td>@claim.ClaimAmount</td>
+                        <td>@claim.ClaimMonth</td>
+                        <td><a href="/Claim/FullClaimView/@claim.ClaimID">View Claim</a></td>
+                        <td>
+                            <form method="post" asp-action="ProcessClaim">
+                                <input type="hidden" name="claimID" value="@claim.ClaimID" />
+                                <button type="submit" name="action" value="approve" class="process-button approve">Approve</button>
+                                <button type="submit" name="action" value="deny" class="process-button deny">Deny</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+@*     <table>
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Lecturer ID</th>
+                <th>Claim Amount</th>
+                <th>Claim Month</th>
+                <th>Verify</th>
+                <th>Process</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimID</td>
+                    <td>@claim.LecturerID</td>
+                    <td>@claim.ClaimAmount</td>
+                    <td>@claim.ClaimMonth</td>
+                    <td><a href="/Claim/FullClaimView/@claim.ClaimID">View Claim</a></td>
+                    <td>
+                        <form method="post" asp-action="ProcessClaim">
+                            <input type="hidden" name="claimID" value="@claim.ClaimID" />
+                            <input type="hidden" name="accountType" value="@ViewBag.AccountType" />
+                            <button type="submit" value="approve" class="process-button approve">Approve</button>
+                            <button type="submit" value="deny" class="process-button deny">Deny</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table> *@
+</body>

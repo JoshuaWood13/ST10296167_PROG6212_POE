@@ -37,14 +37,14 @@ namespace ST10296167_PROG6212_POE.Controllers
         //{
         //    return View();
         //}
-        public IActionResult VerifyClaims()
-        {
-            return View();
-        }
-        public IActionResult FullClaimView()
-        {
-            return View();
-        }
+        //public IActionResult VerifyClaims()
+        //{
+        //    return View();
+        //}
+        //public IActionResult FullClaimView()
+        //{
+        //    return View();
+        //}
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

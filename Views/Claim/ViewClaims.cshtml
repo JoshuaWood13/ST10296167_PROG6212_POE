@@ -58,52 +58,8 @@
                     <td>@claim.ClaimMonth</td>
                     <td>R @claim.ClaimAmount.ToString("F2")</td>
                     <td>@claim.Status</td>
-                    @* @if(claim.ApprovalPC == 0 && claim.ApprovalAM == 0)
-                    {
-                        <td>Pending (0/2)</td>
-                    }
-                    else if(claim.ApprovalPC == 2)
-                    {
-                        <td>Rejected</td>
-                    }
-                    else if (claim.ApprovalPC == 1 && claim.ApprovalAM == 0)
-                    {
-                        <td>Pending (1/2)</td>
-                    }
-                    else if (claim.ApprovalPC == 1 && claim.ApprovalAM == 1)
-                    {
-                        <td>Approved</td>
-                    }
-                    else if (claim.ApprovalPC == 1 && claim.ApprovalAM == 2)
-                    {
-                        <td>Rejected</td>
-                    } *@
                 </tr>
             }
-           @*  <tr>
-                <td>001</td>
-                <td>January</td>
-                <td>R10000.00</td>
-                <td>Approved</td>
-            </tr>
-            <tr>
-                <td>002</td>
-                <td>February</td>
-                <td>R12000.00</td>
-                <td>Pending</td>
-            </tr>
-            <tr>
-                <td>003</td>
-                <td>March</td>
-                <td>R13500.00</td>
-                <td>Rejected</td>
-            </tr>
-            <tr>
-                <td>004</td>
-                <td>April</td>
-                <td>R16000.00</td>
-                <td>Approved</td>
-            </tr> *@
         </tbody>
     </table>
 </body>
