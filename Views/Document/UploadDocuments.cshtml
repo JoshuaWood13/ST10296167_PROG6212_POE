@@ -27,10 +27,6 @@
             margin-bottom: 20px;
         }
 
-        .FileUpload {
-            margin-left: 190px;
-        }
-
         button {
             margin-top: 15px;
             width: 200px;
@@ -42,6 +38,30 @@
 
         .IDLink {
             border-radius: 10px;
+        }
+
+        .inputBorder {
+            display: inline-block;
+            padding: 25px;
+            border: 2px solid darkgray;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .inputBorder input.IDLink {
+            width: calc(100% - 100px);
+            padding: 10px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            font-size: 18px; 
+            width: 250px; 
+            height: 50px; 
+            border-radius: 10px; 
+            border: 2px solid black; 
         }
     </style>
 </head>
@@ -63,15 +83,17 @@
 <h1>Upload Supporting Documents</h1>
 <h2>Please upload any documents to support your claim</h2>
 <body>
-    <form action="UploadDocs" method="post" enctype="multipart/form-data">
-        <p>Link to Claim ID:</p>
-        <input class="IDLink" type="number" name="ClaimID" placeholder="" required />
-        <p>Select Document Files:</p>
-        <div class="FileUpload">
-            <input type="file" name="File" accept=".pdf, .docx, .xlsx, .txt" required/>
-        </div>
-        <button type="submit"><strong>Submit Files</strong></button>
-    </form>
+    <div class="inputBorder">
+        <form action="UploadDocs" method="post" enctype="multipart/form-data">
+            <p>Link to Claim ID:</p>
+            <input class="IDLink" type="number" name="ClaimID" placeholder="" required />
+            <p>Select Document Files:</p>
+            <div class="FileUpload">
+                <input type="file" name="File" accept=".pdf, .docx, .xlsx, .txt" required />
+            </div>
+            <button type="submit"><strong>Submit Files</strong></button>
+        </form>
+    </div>
 </body>
 
 

@@ -24,6 +24,17 @@
         p {
             font-size: 20px;
         }
+
+        .border {
+            display: inline-block;
+            padding: 25px;
+            border: 2px solid darkgray;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 500px;
+            text-align: left;
+        }
     </style>
 
 </head>
@@ -31,27 +42,29 @@
 <body>
     <h1>Claim @Model.ClaimID</h1>
 
-    <p><strong>Claim Month: </strong>@Model.ClaimMonth</p>
-    <p><strong>Hourly Rate: </strong>R @Model.HourlyRate</p>
-    <p><strong>Hours Worked: </strong>@Model.HoursWorked</p>
-    <p><strong>Claim Amount: </strong>R @Model.ClaimAmount</p>
-    <p><strong>Additional notes:</strong></p>
-    <p>@Model.Description</p>
-    <p><strong>Supporting Documentation:</strong></p>
-    @if (Model.Documents != null && Model.Documents.Any())
-    {
-        <ul>
-            @foreach (var doc in Model.Documents)
-            {
-                <li>@doc.FileName</li>
-            }
-        </ul>
-    }
-    else
-    {
-        <p>No supporting documents were uploaded.</p>
-    }
-    <form method="post" asp-action="ReturnToVerifyClaims">
-        <button type="submit">Return</button>
-    </form>
+    <div class="border">
+        <p><strong>Claim Month: </strong>@Model.ClaimMonth</p>
+        <p><strong>Hourly Rate: </strong>R @Model.HourlyRate</p>
+        <p><strong>Hours Worked: </strong>@Model.HoursWorked</p>
+        <p><strong>Claim Amount: </strong>R @Model.ClaimAmount</p>
+        <p><strong>Additional notes:</strong></p>
+        <p>@Model.Description</p>
+        <p><strong>Supporting Documentation:</strong></p>
+        @if (Model.Documents != null && Model.Documents.Any())
+        {
+            <ul>
+                @foreach (var doc in Model.Documents)
+                {
+                    <li>@doc.FileName</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No supporting documents were uploaded.</p>
+        }
+        <form method="post" asp-action="ReturnToVerifyClaims" style="text-align: center;">
+            <button type="submit">Return</button>
+        </form>
+    </div>
 </body>

@@ -18,7 +18,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             return View();
         }
 
-
+        // ref: https://www.c-sharpcorner.com/article/restrict-uploaded-file-size-in-asp-net-core2/#:~:text=In%20ASP.NET%20Core%2C%20you,programmatically%20in%20your%20controller%20actions.
         [HttpPost]
         [RequestSizeLimit(5000000)] // Limit file size to 5 MB
         public async Task<IActionResult> UploadDocs(int ClaimID, IFormFile File)

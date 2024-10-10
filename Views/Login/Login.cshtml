@@ -39,25 +39,43 @@
             font-size: 20px;
             width: 200px;
             border-radius: 5px;
+            padding: 10px 10px;
             background-color: skyblue;
+        }
+
+        .inputBorder {
+            display: inline-block;
+            padding: 25px;
+            border: 2px solid darkgray;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .inputBorder input, .inputBorder select {
+            width: calc(100% - 100px);
+            padding: 10px;
         }
     </style>
 </head>
 
 <h1>Login</h1>
 <body>
-    <form action="LoginUser" method="post">
-        <p>Select Account Type:</p>
-        <select name="Account" required>
-            <option value="Academic Manager">Academic Manager</option>
-            <option value="Lecturer">Lecturer</option>
-            <option value="Programme Coordinator">Programme Coordinator</option>
-        </select>
-        <p>Account ID:</p>
-        <input type="number" name="AccountID" placeholder="" required />
-        <p>Password:</p>
-        <input type="text" name="Password" placeholder="" required />
-        <p></p>
-        <button type="submit"><strong>Login</strong></button>
-    </form>
+    <div class="inputBorder">
+        <form action="LoginUser" method="post">
+            <p>Select Account Type:</p>
+            <select name="Account" required>
+                <option value="Academic Manager">Academic Manager</option>
+                <option value="Lecturer">Lecturer</option>
+                <option value="Programme Coordinator">Programme Coordinator</option>
+            </select>
+            <p>Account ID:</p>
+            <input type="number" name="AccountID" placeholder="" required />
+            <p>Password:</p>
+            <input type="text" name="Password" placeholder="" required />
+            <p></p>
+            <button type="submit"><strong>Login</strong></button>
+        </form>
+    </div>
 </body>

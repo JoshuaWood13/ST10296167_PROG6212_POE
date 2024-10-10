@@ -43,7 +43,6 @@ namespace ST10296167_PROG6212_POE.Controllers
             {
                 claims = null; // Default case if needed
             }
-            ViewBag.AccountType = accountType;
             //var claims = await _context.Claims.ToListAsync();
             return View(claims);
         }

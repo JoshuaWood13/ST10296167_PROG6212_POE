@@ -31,7 +31,7 @@
         select {
             margin-top: 5px;
             margin-bottom: 10px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
         textarea {
@@ -43,15 +43,25 @@
         button {
             margin-top: 0px;
             font-size: 20px;
-            width: 200px;
+            width: 300px;
             padding: 5px 10px;
             border-radius: 5px;
             background-color: skyblue;
         }
 
-        #Calculation {
-            color: lawngreen;
-            font-weight: bold;
+        .inputBorder{
+            display: inline-block;
+            padding: 25px;
+            border: 2px solid darkgray;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 500px;
+        }
+
+        .inputBorder input, .inputBorder select, .inputBorder textarea {
+            width: calc(100% - 50px); 
+            padding: 10px;
         }
     </style>
 </head>
@@ -59,31 +69,31 @@
 <h1>Submit Claim</h1>
 <h2>Please enter all relevant claim details</h2>
 <body>
-    <form action="SubmitClaim" method="post">
-        <p>Select Claim Month:</p>
-        <select name="Month" required>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
-        <p>Hourly Rate:</p>
-        <input type="number" name="HourlyRate" placeholder="" required />
-        <p>Hours Worked:</p>
-        <input type="number" name="HoursWorked" placeholder="" required />
-       @*  <p>Calculated Claim Amount:</p>
-        <p id="Calculation">R6000 (Example)</p> *@
-        <p>Additional notes:</p>
-        <textarea name="Notes" rows="5" cols="40" placeholder="Enter any notes relevant to your claim..." required></textarea>
-        <br /><br/>
-        <button type="submit"><strong>Submit Claim</strong></button>
-    </form>
+    <div class="inputBorder">
+        <form action="SubmitClaim" method="post">
+            <p>Select Claim Month:</p>
+            <select name="Month" required>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+            <p>Hourly Rate:</p>
+            <input type="number" name="HourlyRate" placeholder="" required />
+            <p>Hours Worked:</p>
+            <input type="number" name="HoursWorked" placeholder="" required />
+            <p>Additional notes:</p>
+            <textarea name="Notes" rows="5" cols="40" placeholder="Enter any notes relevant to your claim..." required></textarea>
+            <br /><br />
+            <button type="submit"><strong>Submit Claim</strong></button>
+        </form>
+    </div>
 </body>
