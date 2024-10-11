@@ -41,9 +41,9 @@ namespace ST10296167_PROG6212_POE.Controllers
             }
             else
             {
-                claims = null; // Default case if needed
+                claims = null; 
             }
-            //var claims = await _context.Claims.ToListAsync();
+
             return View(claims);
         }
 
@@ -81,28 +81,6 @@ namespace ST10296167_PROG6212_POE.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> SubmitClaim(string Month, double HourlyRate, double HoursWorked, string Notes)
-        //{
-        //    double amount = HourlyRate * HoursWorked;
-        //    var lecturerID = HttpContext.Session.GetInt32("AccountID");
-
-        //    var claim = new Claims
-        //    {
-        //        LecturerID = (int)lecturerID,
-        //        HourlyRate = HourlyRate,
-        //        HoursWorked = HoursWorked,
-        //        ClaimAmount = amount,
-        //        ClaimMonth = Month,
-        //        Description = Notes
-        //    };
-
-        //    await _context.Claims.AddAsync(claim);
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToAction("Index", "Home");
-        //}
 
         [HttpPost]
         public IActionResult ReturnToVerifyClaims()

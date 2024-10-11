@@ -13,11 +13,11 @@ namespace ST10296167_PROG6212_POE.Models
         public int ClaimID { get; set; }
 
         [Required(ErrorMessage = "Please select a file to upload ")]
-        public byte[] FileData { get; set; }  // Store the file data as a byte array
+        public byte[] FileData { get; set; }  
 
         [Required]
-        [StringLength(100)]  // Limiting the length of the file name
-        public string FileName { get; set; }  // The original name of the uploaded file
+        [StringLength(100)]  
+        public string FileName { get; set; }  
 
         public Claims Claims { get; set; }  // Navigation property back to Claims
     }

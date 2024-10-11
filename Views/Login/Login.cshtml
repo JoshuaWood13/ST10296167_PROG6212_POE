@@ -1,4 +1,6 @@
-﻿<head>
+﻿@model ST10296167_PROG6212_POE.Models.Login;
+
+<head>
     <style>
         h1 {
             font-size: 50px;
@@ -57,6 +59,11 @@
             width: calc(100% - 100px);
             padding: 10px;
         }
+
+        .text-danger {
+            display: block;
+            padding-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -64,17 +71,22 @@
     <h1>Login</h1>
     <div class="inputBorder">
         <form action="LoginUser" method="post">
+
             <p>Select Account Type:</p>
             <select name="Account" required>
                 <option value="Academic Manager">Academic Manager</option>
                 <option value="Lecturer">Lecturer</option>
                 <option value="Programme Coordinator">Programme Coordinator</option>
             </select>
+
             <p>Account ID:</p>
-            <input type="number" name="AccountID" placeholder="" required />
+            <input asp-for="AccountID" />
+            <span asp-validation-for="AccountID" class="text-danger"></span>
+
             <p>Password:</p>
-            <input type="text" name="Password" placeholder="" required />
-            <p></p>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+
             <button type="submit"><strong>Login</strong></button>
         </form>
     </div>

@@ -4,6 +4,7 @@ using ST10296167_PROG6212_POE.Data;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ST10296167_PROG6212_POE.Controllers
 {
@@ -24,30 +25,32 @@ namespace ST10296167_PROG6212_POE.Controllers
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();
-            //HttpContext.Session.SetInt32("IsLoggedIn", 0);
-            //HttpContext.Session.Remove("AccountType");
             return RedirectToAction("Login", "Login");
         }
 
         [HttpPost]
-        public IActionResult LoginUser(string Account, int AccountID, string Password)
+        public IActionResult LoginUser(string Account, Login login)
         {
-            // Validate user credentials
-            bool loginSuccessful = ValidateUser(Account, AccountID, Password);
+            if (!ModelState.IsValid)
+            {
+                return View("Login", login); 
+            }
+
+            bool loginSuccessful = ValidateUser(Account, login.AccountID, login.Password);
 
             if (loginSuccessful)
             {
-                // Set session variable
+                // Set session variables
                 HttpContext.Session.SetString("AccountType", Account);
                 HttpContext.Session.SetInt32("IsLoggedIn", 1);
-                HttpContext.Session.SetInt32("AccountID", AccountID);
+                HttpContext.Session.SetInt32("AccountID", login.AccountID);
 
-                // Redirect to a dashboard or home page
                 return RedirectToAction("Index", "Home");
             }
 
             // If login fails, return to login view with error message
             TempData["Error"] = "Incorrect Account ID or password";
+            ModelState.Clear();
             return View("Login");
         }
 
@@ -59,33 +62,21 @@ namespace ST10296167_PROG6212_POE.Controllers
                 var lecturer = _context.Lecturers
                     .FirstOrDefault(l => l.LecturerID == accountID && l.Password == password);
                 return lecturer != null;
-                //var sqlQuery = $"SELECT * FROM Lecturers WHERE LecturerID = {accountID} AND Password = '{password}'";
-                //// Execute the SQL query
-                //var user = _context.Lecturers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
-                //return user != null;
             }
             else if (accountType == "Academic Manager")
             {
                 var academicManager = _context.AcademicManagers
                     .FirstOrDefault(am => am.AM_ID == accountID && am.Password == password);
                 return academicManager != null;
-                //var sqlQuery = $"SELECT * FROM AcademicManagers WHERE AM_ID = {accountID} AND Password = '{password}'";
-                //// Execute the SQL query
-                //var user = _context.AcademicManagers.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
-                //return user != null;
             }
             else if (accountType == "Programme Coordinator")
             {
                 var programmeCoordinator = _context.ProgrammeCoordinators
                     .FirstOrDefault(pm => pm.PM_ID == accountID && pm.Password == password);
                 return programmeCoordinator != null;
-                //var sqlQuery = $"SELECT * FROM ProgrammeCoordinators WHERE PD_ID = {accountID} AND Password = '{password}'";
-                //// Execute the SQL query
-                //var user = _context.ProgrammeCoordinators.FromSqlRaw(sqlQuery).FirstOrDefault(); // This will fetch the user or null if not found
-                //return user != null;
             }
 
-            return false; // Return true if user exists
+            return false; 
 
         }
     }

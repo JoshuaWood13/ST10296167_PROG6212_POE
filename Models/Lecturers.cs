@@ -12,16 +12,5 @@ namespace ST10296167_PROG6212_POE.Models
         [StringLength(100)]
         public string Password { get; set; }
 
-        //[Required]
-        //[StringLength(100)]
-        //public string Name { get; set; }
-
-        //[Required]
-        //[StringLength(100)]
-        //public string Surname { get; set; }
-
-        //[Required]
-        //[StringLength(100)]
-        //public string Email { get; set; }
     }
 }
