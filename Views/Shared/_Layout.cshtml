@@ -101,6 +101,19 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        // Hide the alert after 10 seconds
+        setTimeout(function () {
+            var alert = document.getElementById('alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }, 10000); // 10 seconds
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

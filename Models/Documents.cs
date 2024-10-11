@@ -9,9 +9,10 @@ namespace ST10296167_PROG6212_POE.Models
         public int DocumentID { get; set; }
 
         [ForeignKey("Claims")]
+        [Required(ErrorMessage = "Please enter a Claim ID")]
         public int ClaimID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a file to upload ")]
         public byte[] FileData { get; set; }  // Store the file data as a byte array
 
         [Required]

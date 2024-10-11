@@ -47,7 +47,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             }
 
             // If login fails, return to login view with error message
-            ViewBag.ErrorMessage = "Invalid credentials. Please try again.";
+            TempData["Error"] = "Incorrect Account ID or password";
             return View("Login");
         }
 

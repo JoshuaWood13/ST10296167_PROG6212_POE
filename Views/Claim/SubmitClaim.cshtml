@@ -1,4 +1,6 @@
-﻿<head>
+﻿@model ST10296167_PROG6212_POE.Models.Claims;
+
+<head>
     <style>
         h1 {
             font-size: 50px;
@@ -32,6 +34,8 @@
             margin-top: 5px;
             margin-bottom: 10px;
             border-radius: 10px;
+            width: 250px;
+            height: 40px;
         }
 
         textarea {
@@ -59,20 +63,26 @@
             width: 500px;
         }
 
-        .inputBorder input, .inputBorder select, .inputBorder textarea {
+        .inputBorder input asp-for, .inputBorder select asp-for, .inputBorder textarea asp-for {
             width: calc(100% - 50px); 
             padding: 10px;
+        }
+
+        .text-danger {
+            display: block;
+            padding-bottom: 10px;
         }
     </style>
 </head>
 
-<h1>Submit Claim</h1>
-<h2>Please enter all relevant claim details</h2>
 <body>
+    <h1>Submit Claim</h1>
+    <h2>Please enter all relevant claim details</h2>
+
     <div class="inputBorder">
-        <form action="SubmitClaim" method="post">
+        <form asp-action="SubmitClaim" method="post">
             <p>Select Claim Month:</p>
-            <select name="Month" required>
+            <select asp-for="ClaimMonth" >
                 <option value="January">January</option>
                 <option value="February">February</option>
                 <option value="March">March</option>
@@ -86,14 +96,21 @@
                 <option value="November">November</option>
                 <option value="December">December</option>
             </select>
+            <span asp-validation-for="ClaimMonth" class="text-danger"></span>
+
             <p>Hourly Rate:</p>
-            <input type="number" name="HourlyRate" placeholder="" required />
+            <input asp-for="HourlyRate" placeholder="" />
+            <span asp-validation-for="HourlyRate" class="text-danger"></span>
+
             <p>Hours Worked:</p>
-            <input type="number" name="HoursWorked" placeholder="" required />
-            <p>Additional notes:</p>
-            <textarea name="Notes" rows="5" cols="40" placeholder="Enter any notes relevant to your claim..." required></textarea>
+            <input asp-for="HoursWorked" placeholder="" />
+            <span asp-validation-for="HoursWorked" class="text-danger"></span>
+
+            <p>Additional Notes:</p>
+            <textarea asp-for="Description" rows="5" cols="40" placeholder="Enter any notes relevant to your claim..."></textarea>
+
             <br /><br />
-            <button type="submit"><strong>Submit Claim</strong></button>
+            <button type="submit" ><strong>Submit Claim</strong></button>
         </form>
     </div>
 </body>

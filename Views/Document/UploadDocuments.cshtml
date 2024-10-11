@@ -1,4 +1,6 @@
-﻿<head>
+﻿@model ST10296167_PROG6212_POE.Models.Documents;
+
+<head>
     <style>
         h1 {
             font-size: 50px;
@@ -63,46 +65,43 @@
             border-radius: 10px; 
             border: 2px solid black; 
         }
+
+        .text-danger {
+            display: block;
+            padding-bottom:10px;
+        }
     </style>
 </head>
 
-@if (TempData["Success"] != null)
-{
-    <div id="alert" class="alert alert-success">
-        @TempData["Success"]
-    </div>
-}
-
-@if (TempData["Error"] != null)
-{
-    <div id="alert" class="alert alert-danger">
-        @TempData["Error"]
-    </div>
-}
-
-<h1>Upload Supporting Documents</h1>
-<h2>Please upload any documents to support your claim</h2>
 <body>
+    <h1>Upload Supporting Documents</h1>
+    <h2>Please upload any documents to support your claim</h2>
     <div class="inputBorder">
-        <form action="UploadDocs" method="post" enctype="multipart/form-data">
+        <form asp-action="UploadDocs" method="post" enctype="multipart/form-data">
             <p>Link to Claim ID:</p>
-            <input class="IDLink" type="number" name="ClaimID" placeholder="" required />
+            <input asp-for="ClaimID" class="IDLink" required/>
+            <span asp-validation-for="ClaimID" class="text-danger"></span>
+
             <p>Select Document Files:</p>
-            <div class="FileUpload">
-                <input type="file" name="File" accept=".pdf, .docx, .xlsx, .txt" required />
-            </div>
+            <input type="file" name="File" accept=".pdf, .docx, .xlsx, .txt" />
+@*             <input type="file" asp-for="FileData" accept=".pdf, .docx, .xlsx, .txt" /> *@
+            <span asp-validation-for="FileData" class="text-danger"></span>
+
             <button type="submit"><strong>Submit Files</strong></button>
         </form>
     </div>
+    <br /><br />
+    @if (TempData["Success"] != null)
+    {
+        <div id="alert" class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div id="alert" class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
 </body>
-
-
-<script>
-    // Hide the alert after 10 seconds 
-    setTimeout(function () {
-        var alert = document.getElementById('alert');
-        if (alert) {
-            alert.style.display = 'none';
-        }
-    }, 10000); //  10 seconds
-</script>

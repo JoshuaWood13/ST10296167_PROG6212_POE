@@ -11,16 +11,16 @@ namespace ST10296167_PROG6212_POE.Models
         [ForeignKey("Lecturers")]
         public int LecturerID { get; set; }
 
-        [Required]
-        [Range(0, double.MaxValue)]  
+        [Required(ErrorMessage = "Please enter an hourly rate")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Hourly rate must be above 0")]  
         public double HourlyRate { get; set; }
 
-        [Required]
-        [Range(0, double.MaxValue)]
+        [Required(ErrorMessage = "Please enter hours worked")]
+        [Range(1, double.MaxValue, ErrorMessage = "Must have worked 1 hour or more")]
         public double HoursWorked { get; set; }
 
         [Required]
-        [Range(0, double.MaxValue)]
+        [Range(0.01, double.MaxValue)]
         public double ClaimAmount { get; set; }
 
         [Required]
