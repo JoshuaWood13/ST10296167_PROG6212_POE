@@ -50,7 +50,6 @@ namespace ST10296167_PROG6212_POE
                 {
                     dbContext.Lecturers.Add(new Lecturers
                     {
-                        //LecturerID = 1,
                         Password = "Lecturer123"
                     });
                 }
@@ -59,7 +58,6 @@ namespace ST10296167_PROG6212_POE
                 {
                     dbContext.ProgrammeCoordinators.Add(new ProgrammeCoordinator
                     {
-                        //PM_ID = 1,
                         Password = "PM123"
                     });
                 }
@@ -68,12 +66,11 @@ namespace ST10296167_PROG6212_POE
                 {
                     dbContext.AcademicManagers.Add(new AcademicManager
                     {
-                        //AM_ID = 1,
                         Password = "AM123"
                     });
                 }
 
-                dbContext.SaveChanges(); // Save all changes to the database.
+                dbContext.SaveChanges(); 
             }
 
             app.Run();
