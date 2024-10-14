@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+// References:
+// C# Corner. 2024. Restrict Uploaded File Size in ASP.NET Core, [Online]. Available at: https://www.c-sharpcorner.com/article/restrict-uploaded-file-size-in-asp-net-core2/ [Accessed 10 Oct. 2024].
+
+using Microsoft.AspNetCore.Mvc;
 using ST10296167_PROG6212_POE.Data;
 using ST10296167_PROG6212_POE.Models;
 using System.Security.Claims;
@@ -9,27 +15,21 @@ namespace ST10296167_PROG6212_POE.Controllers
     {
         private readonly AppDbContext _context;
 
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public DocumentController(AppDbContext context)
         {
             _context = context;
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult UploadDocuments()
         {
             return View();
         }
-
-        // ref: https://www.c-sharpcorner.com/article/restrict-uploaded-file-size-in-asp-net-core2/#:~:text=In%20ASP.NET%20Core%2C%20you,programmatically%20in%20your%20controller%20actions.
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         [HttpPost]
-        [RequestSizeLimit(5000000)] // Limit file size to 5 MB
+        [RequestSizeLimit(5000000)] // Limit file size to 5 MB (C# Corner, 2024).
         public async Task<IActionResult> UploadDocs(Documents document, IFormFile File)
         {
-
-            //if (document.ClaimID == 0)
-            //{
-            //    return View("UploadDocuments", document);
-            //}
-
             var lecturerID = HttpContext.Session.GetInt32("AccountID");
 
             var claim = await _context.Claims.FindAsync(document.ClaimID);
@@ -89,5 +89,7 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return View("UploadDocuments", document);
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

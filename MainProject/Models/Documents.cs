@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace ST10296167_PROG6212_POE.Models
@@ -19,6 +23,7 @@ namespace ST10296167_PROG6212_POE.Models
         [StringLength(100)]  
         public string FileName { get; set; }  
 
-        public Claims Claims { get; set; }  // Navigation property back to Claims
+        public Claims Claims { get; set; }  // Navigation property for Claims
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

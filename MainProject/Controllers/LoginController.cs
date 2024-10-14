@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+
+using Microsoft.AspNetCore.Mvc;
 using ST10296167_PROG6212_POE.Models;
 using ST10296167_PROG6212_POE.Data;
 using System.Diagnostics;
@@ -12,11 +16,12 @@ namespace ST10296167_PROG6212_POE.Controllers
     {
         private readonly AppDbContext _context;
 
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public LoginController(AppDbContext context)
         {
             _context = context;
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult Login()
         {
             return View();
@@ -27,7 +32,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Login");
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         [HttpPost]
         public IActionResult LoginUser(string Account, Login login)
         {
@@ -53,7 +58,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             ModelState.Clear();
             return View("Login");
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         private bool ValidateUser(string accountType, int accountID, string password)
         {
 
@@ -79,5 +84,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             return false; 
 
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

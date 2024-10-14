@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ST10296167_PROG6212_POE.Models
@@ -38,7 +42,6 @@ namespace ST10296167_PROG6212_POE.Models
 
         public ICollection<Documents> Documents { get; set; }  // Navigation property to access related documents
 
-
         public string Status
         {
             get
@@ -59,3 +62,4 @@ namespace ST10296167_PROG6212_POE.Models
         }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

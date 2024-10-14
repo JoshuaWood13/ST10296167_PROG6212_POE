@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Microsoft.EntityFrameworkCore;
 using ST10296167_PROG6212_POE.Data;
 using ST10296167_PROG6212_POE.Controllers;
 using ST10296167_PROG6212_POE.Models;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ST10296167_PROG6212_POE_UnitTests
 {
@@ -20,6 +19,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
         private AppDbContext context;
         private DocumentController controller;
 
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         [TestInitialize]
         public void Initialize()
         {
@@ -172,3 +172,4 @@ namespace ST10296167_PROG6212_POE_UnitTests
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+
+using Microsoft.AspNetCore.Mvc;
 using ST10296167_PROG6212_POE.Data;
 using ST10296167_PROG6212_POE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +13,12 @@ namespace ST10296167_PROG6212_POE.Controllers
     {
         private readonly AppDbContext _context;
 
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public ClaimController(AppDbContext context)
         {
             _context = context;
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult SubmitClaim()
         {
             return View();
@@ -53,6 +58,7 @@ namespace ST10296167_PROG6212_POE.Controllers
 
             return View(claim);
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
 
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(Claims model)
@@ -127,5 +133,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("VerifyClaims"); 
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

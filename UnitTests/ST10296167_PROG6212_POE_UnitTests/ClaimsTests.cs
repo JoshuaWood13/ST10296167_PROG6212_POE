@@ -1,3 +1,7 @@
+// Name: Joshua Wood
+// Student number: ST10296167
+// Group: 2
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +18,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
         private ClaimController controller;
         private AppDbContext context;
 
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         [TestInitialize]
         public void Initialize()
         {
@@ -75,7 +80,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
             // Assert 
             var dbClaim = context.Claims.FirstOrDefault(c => c.Description == "Test");
 
-            // Check that claim is succesfully added to DB
+            // Verify that claim is succesfully added to DB
             Assert.IsNotNull(dbClaim);
             Assert.AreEqual(validClaim.Description, dbClaim.Description);
             Assert.AreEqual(validClaim.HourlyRate, dbClaim.HourlyRate);
@@ -104,7 +109,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
             var result = await controller.SubmitClaim(invalidClaim);
 
             // Assert
-            // Check that Invalid Claim is not added to DB 
+            // Verify that Invalid Claim is not added to DB 
             Assert.IsFalse(controller.ModelState.IsValid);
             Assert.IsTrue(controller.ModelState.ContainsKey("HourlyRate"));
             Assert.AreEqual("Please enter an hourly rate", controller.ModelState["HourlyRate"].Errors[0].ErrorMessage);
@@ -153,7 +158,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
             // Assert
             var updatedClaim = await context.Claims.FindAsync(claim.ClaimID); 
 
-            // Check PC Approval and Claim Status are correctly updated
+            // Verify that PC Approval and Claim Status are correctly updated
             Assert.AreEqual(1, updatedClaim?.ApprovalPC);  
             Assert.AreEqual("Pending (1/2)", updatedClaim?.Status);
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -197,7 +202,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
             // Assert
             var updatedClaim = await context.Claims.FindAsync(claim.ClaimID);
 
-            // Check PC Approval and Claim Status are correctly updated
+            // Verify that PC Approval and Claim Status are correctly updated
             Assert.AreEqual(2, updatedClaim?.ApprovalPC);
             Assert.AreEqual("Rejected", updatedClaim?.Status);
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -241,7 +246,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
             // Assert
             var updatedClaim = await context.Claims.FindAsync(claim.ClaimID);
 
-            // Check AM Approval and Claim Status are correctly updated
+            // Verify that AM Approval and Claim Status are correctly updated
             Assert.AreEqual(1, updatedClaim?.ApprovalAM);  
             Assert.AreEqual("Approved", updatedClaim?.Status);
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -285,7 +290,7 @@ namespace ST10296167_PROG6212_POE_UnitTests
             // Assert
             var updatedClaim = await context.Claims.FindAsync(claim.ClaimID);
 
-            // Check AM Approval and Claim Status are correctly updated
+            // Verify that AM Approval and Claim Status are correctly updated
             Assert.AreEqual(2, updatedClaim?.ApprovalAM);
             Assert.AreEqual("Rejected", updatedClaim?.Status);
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -293,3 +298,4 @@ namespace ST10296167_PROG6212_POE_UnitTests
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//
