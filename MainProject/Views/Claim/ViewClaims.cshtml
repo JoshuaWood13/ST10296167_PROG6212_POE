@@ -47,6 +47,7 @@
                 <th>Claim ID</th>
                 <th>Claim Month</th>
                 <th>Claim Amount</th>
+                <th>View</th>
                 <th>Claim Status</th>
             </tr>
         </thead>
@@ -57,6 +58,7 @@
                     <td>@claim.ClaimID</td>
                     <td>@claim.ClaimMonth</td>
                     <td>R @claim.ClaimAmount.ToString("F2")</td>
+                    <td><a href="/Claim/FullClaimView/@claim.ClaimID">View Claim</a></td>
                     <td>@claim.Status</td>
                 </tr>
             }

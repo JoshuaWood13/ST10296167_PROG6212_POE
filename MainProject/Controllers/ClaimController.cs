@@ -91,6 +91,10 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public IActionResult ReturnToVerifyClaims()
         {
+            if (HttpContext.Session.GetString("AccountType") == "Lecturer")
+            {
+                return RedirectToAction("ViewClaims");
+            }
             return RedirectToAction("VerifyClaims");
         }
 
