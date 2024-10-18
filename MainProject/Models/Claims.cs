@@ -30,7 +30,7 @@ namespace ST10296167_PROG6212_POE.Models
         [Required]
         public string ClaimMonth { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Range(0,1)]
         public int ApprovalPC { get; set; }

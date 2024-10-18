@@ -48,7 +48,14 @@
         <p><strong>Hours Worked: </strong>@Model.HoursWorked</p>
         <p><strong>Claim Amount: </strong>R @Model.ClaimAmount</p>
         <p><strong>Additional notes:</strong></p>
-        <p>@Model.Description</p>
+        @if(Model.Description == null)
+        {
+            <p>No additional notes were added.</p>
+        }
+        else
+        {
+            <p>@Model.Description</p>
+        }
         <p><strong>Supporting Documentation:</strong></p>
         @if (Model.Documents != null && Model.Documents.Any())
         {
@@ -61,7 +68,7 @@
         }
         else
         {
-            <p>No supporting documents were uploaded.</p>
+            <p>No supporting documents have been uploaded.</p>
         }
         <form method="post" asp-action="ReturnToVerifyClaims" style="text-align: center;">
             <button type="submit">Return</button>

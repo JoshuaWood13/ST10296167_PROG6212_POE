@@ -63,12 +63,6 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(Claims model)
         {
-            if (!ModelState.IsValid)
-            {
-                // If validation fails, return the view with the model to display errors
-                return View(model);
-            }
-
             double amount = model.HourlyRate * model.HoursWorked;
             var lecturerID = HttpContext.Session.GetInt32("AccountID");
 
@@ -85,7 +79,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             await _context.Claims.AddAsync(claim);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewClaims");
         }
 
         [HttpPost]
