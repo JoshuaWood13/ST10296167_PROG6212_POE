@@ -15,17 +15,25 @@ namespace ST10296167_PROG6212_POE.Controllers
     {
         private readonly AppDbContext _context;
 
+        // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public DocumentController(AppDbContext context)
         {
             _context = context;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        //Views
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult UploadDocuments()
         {
             return View();
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method handles checking and uploading a valid file to a valid claim
         [HttpPost]
         [RequestSizeLimit(5000000)] // Limit file size to 5 MB (C# Corner, 2024).
         public async Task<IActionResult> UploadDocs(Documents document, IFormFile File)

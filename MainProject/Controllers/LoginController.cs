@@ -16,11 +16,15 @@ namespace ST10296167_PROG6212_POE.Controllers
     {
         private readonly AppDbContext _context;
 
+        // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public LoginController(AppDbContext context)
         {
             _context = context;
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        //Views
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult Login()
         {
@@ -33,6 +37,10 @@ namespace ST10296167_PROG6212_POE.Controllers
             return RedirectToAction("Login", "Login");
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method handles logging in a valid user and setting the correct session values
         [HttpPost]
         public IActionResult LoginUser(string Account, Login login)
         {
@@ -57,7 +65,9 @@ namespace ST10296167_PROG6212_POE.Controllers
             ModelState.Clear();
             return View("Login");
         }
+
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method validates that the account ID and password input, matches a created account
         private bool ValidateUser(string accountType, int accountID, string password)
         {
 

@@ -12,12 +12,16 @@ namespace ST10296167_PROG6212_POE.Controllers
     public class ClaimController : Controller
     {
         private readonly AppDbContext _context;
-
+        
+        // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public ClaimController(AppDbContext context)
         {
             _context = context;
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // Views
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult SubmitClaim()
         {
@@ -60,6 +64,9 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method handles submitting a valid claim to the DB
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(Claims model)
         {
@@ -82,6 +89,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             return RedirectToAction("ViewClaims");
         }
 
+        // This method handles returning a user to the correct claims view
         [HttpPost]
         public IActionResult ReturnToVerifyClaims()
         {
@@ -92,6 +100,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             return RedirectToAction("VerifyClaims");
         }
 
+        // This method handles assigning PC's and AM's approval or denial
         [HttpPost]
         public async Task<IActionResult> ProcessClaim(int claimID, string action)
         {
