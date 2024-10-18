@@ -53,7 +53,6 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // If login fails, return to login view with error message
             TempData["Error"] = "Incorrect Account ID or password";
             ModelState.Clear();
             return View("Login");

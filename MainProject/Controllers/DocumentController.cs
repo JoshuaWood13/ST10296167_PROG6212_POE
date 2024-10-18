@@ -35,8 +35,15 @@ namespace ST10296167_PROG6212_POE.Controllers
             var claim = await _context.Claims.FindAsync(document.ClaimID);
             if (claim == null || claim.LecturerID != lecturerID)
             {
-                TempData["Error"] = $"Claim <{document.ClaimID}> does not exist, or you do not have permission to upload files to this Claim";
-                return View("UploadDocuments", document);
+                if (File == null || File.Length <= 0)
+                {
+                    return View("UploadDocuments", document);
+                }
+                else
+                {
+                    TempData["Error"] = $"Claim <{document.ClaimID}> does not exist, or you do not have permission to upload files to this Claim";
+                    return View("UploadDocuments", document);
+                }
             }
 
             if (File == null || File.Length <= 0)

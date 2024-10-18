@@ -23,7 +23,7 @@ namespace ST10296167_PROG6212_POE.Models
         [StringLength(100)]  
         public string FileName { get; set; }  
 
-        public Claims Claims { get; set; }  // Navigation property for Claims
+        public Claims Claims { get; set; }  // Navigation property for Claims model
     }
 }
 //--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

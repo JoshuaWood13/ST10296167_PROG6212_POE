@@ -40,7 +40,7 @@ namespace ST10296167_PROG6212_POE.Models
 
         public Lecturers Lecturers { get; set; }  // Navigation property to the Lecturers model
 
-        public ICollection<Documents> Documents { get; set; }  // Navigation property to access related documents
+        public ICollection<Documents> Documents { get; set; }  // Navigation property to the Documents model
 
         public string Status
         {
