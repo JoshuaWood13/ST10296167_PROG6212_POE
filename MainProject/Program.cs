@@ -5,6 +5,7 @@
 using Microsoft.EntityFrameworkCore;
 using ST10296167_PROG6212_POE.Data;
 using ST10296167_PROG6212_POE.Models;
+using ST10296167_PROG6212_POE.Services;
 
 namespace ST10296167_PROG6212_POE
 {
@@ -13,6 +14,16 @@ namespace ST10296167_PROG6212_POE
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Registering HttpClient without a base address
+            builder.Services.AddHttpClient<ClaimApiService>(client =>
+            {
+                // No need to set a base address, we're using relative URIs in the service
+            });
+
+           // builder.Services.AddHttpClient();
+
+            builder.Services.AddScoped<ClaimApiService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
