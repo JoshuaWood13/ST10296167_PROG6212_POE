@@ -48,13 +48,13 @@ namespace ST10296167_PROG6212_POE.Controllers
         //    {
         //        claims = await _context.Claims.Where(c => c.ApprovalPC == 0).ToListAsync();
         //    }
-        //    else if(accountType == "Academic Manager")
+        //    else if (accountType == "Academic Manager")
         //    {
         //        claims = await _context.Claims.Where(c => c.ApprovalPC == 1 && c.ApprovalAM == 0).ToListAsync();
         //    }
         //    else
         //    {
-        //        claims = null; 
+        //        claims = null;
         //    }
 
         //    return View(claims);
@@ -62,45 +62,29 @@ namespace ST10296167_PROG6212_POE.Controllers
 
         public async Task<IActionResult> VerifyClaims()
         {
+            var accountType = HttpContext.Session.GetString("AccountType");
 
-            var verifiedClaims = await _claimApiService.GetVerifiedClaimsAsync();
+            //var verifiedClaims = await _claimApiService.GetVerifiedClaimsAsync();
 
-            if (verifiedClaims.Count == 0)
-            {
-                // If no claims are returned, handle the error or show a message
-                return RedirectToAction("Index", "Home");
+            //IEnumerable<Claims> claims;
+            SortedClaims claims;
+
+                if (accountType == "Programme Coordinator")
+                {
+                    claims = await _claimApiService.GetClaimsPCAsync();
+
+                //claims = verifiedClaims.Where(c => c.ApprovalPC == 0).ToList();
             }
-
-            // Pass the verified claims to the view
-            return View(verifiedClaims);
-            //var client = _httpClientFactory.CreateClient("ApiClient");
-
-            //var verifyClaimsResponse = await client.GetAsync("api/ApiControllers/ClaimApi/Verify");
-
-            //var responseContent = await verifyClaimsResponse.Content.ReadAsStringAsync();
-            //await Console.Out.WriteLineAsync(responseContent);
-
-            //if (!verifyClaimsResponse.IsSuccessStatusCode)
-            //{
-            //    // Handle failure if API call fails
-            //    return View("Index", "Home");
-            //}
-
-            //var verifiedClaims = await verifyClaimsResponse.Content.ReadFromJsonAsync<List<Claim>>();
-
-            //// Now, call the SortClaims API to get the claims sorted by user type
-            //var sortClaimsResponse = await _httpClientFactory.CreateClient().PostAsJsonAsync("/api/ApiControllers/ClaimApi/Sort", verifiedClaims);
-
-            //if (!sortClaimsResponse.IsSuccessStatusCode)
-            //{
-            //    // Handle failure if API call fails
-            //    return View("Index", "Home");
-            //}
-
-            //var sortedClaims = await sortClaimsResponse.Content.ReadFromJsonAsync<dynamic>();
-
-            //// Pass sorted claims to the view
-            //return View(sortedClaims);
+                else if (accountType == "Academic Manager")
+                {
+                claims = await _claimApiService.GetClaimsAMAsync();
+                //claims = verifiedClaims.Where(c => c.ApprovalPC == 1 && c.ApprovalAM == 0).ToList();
+            }
+                else
+                {
+                    claims = null;
+            }
+            return View(claims);
         }
 
         public async Task<IActionResult> FullClaimView(int id)

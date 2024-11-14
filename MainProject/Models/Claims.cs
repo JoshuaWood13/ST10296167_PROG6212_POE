@@ -56,8 +56,8 @@ namespace ST10296167_PROG6212_POE.Models
                     return "Approved";
                 else if (ApprovalPC == 1 && ApprovalAM == 2)
                     return "Rejected";
-                else if (ApprovalPC == 2 && ApprovalAM == 2)
-                    return "Invalid";
+                //else if (ApprovalPC == 3 && ApprovalAM == 3)
+                //    return "Invalid";
                 else
                     return "Error"; 
             }

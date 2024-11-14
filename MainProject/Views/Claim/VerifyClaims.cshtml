@@ -1,5 +1,5 @@
-﻿@model List<ST10296167_PROG6212_POE.Models.Claims>
-
+﻿@* @model List<ST10296167_PROG6212_POE.Models.Claims> *@
+@model ST10296167_PROG6212_POE.Models.SortedClaims
 <head>
     <style>
         h1 {
@@ -58,7 +58,130 @@
 
 </head>
 
-<body>
+
+<h1>Outstanding Valid Claims</h1>
+@if (Model == null)
+{
+    <p>There are currently no outstanding claims.</p>
+}
+else
+{
+    <h2>Full Time Claims</h2>
+    @if (Model.FullTime.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Claim ID</th>
+                    <th>Lecturer ID</th>
+                    <th>Claim Amount</th>
+                    <th>Claim Month</th>
+                    <th>Verify</th>
+                    <th>Process</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model.FullTime)
+                {
+                    <tr>
+                        <td>@claim.ClaimID</td>
+                        <td>@claim.LecturerID</td>
+                        <td>R @claim.ClaimAmount</td>
+                        <td>@claim.ClaimMonth</td>
+                        <td><a href="/Claim/FullClaimView/@claim.ClaimID">View Claim</a></td>
+                        <td>
+                            <form method="post" asp-action="ProcessClaim">
+                                <input type="hidden" name="claimID" value="@claim.ClaimID" />
+                                <button type="submit" name="action" value="approve" class="process-button approve">Approve</button>
+                                <button type="submit" name="action" value="deny" class="process-button deny">Deny</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There are currently no outstanding claims for Full Time Lecturers</p>
+    }
+
+    <h2>Part Time Claims</h2>
+    @if (Model.PartTime.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Claim ID</th>
+                    <th>Lecturer ID</th>
+                    <th>Claim Amount</th>
+                    <th>Claim Month</th>
+                    <th>Verify</th>
+                    <th>Process</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model.PartTime)
+                {
+                    <tr>
+                        <td>@claim.ClaimID</td>
+                        <td>@claim.LecturerID</td>
+                        <td>R @claim.ClaimAmount</td>
+                        <td>@claim.ClaimMonth</td>
+                        <td><a href="/Claim/FullClaimView/@claim.ClaimID">View Claim</a></td>
+                        <td>
+                            <form method="post" asp-action="ProcessClaim">
+                                <input type="hidden" name="claimID" value="@claim.ClaimID" />
+                                <button type="submit" name="action" value="approve" class="process-button approve">Approve</button>
+                                <button type="submit" name="action" value="deny" class="process-button deny">Deny</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There are currently no outstanding claims for Full Time Lecturers</p>
+    }
+
+    if(Model.FlaggedFT.Any() || Model.FlaggedPT.Any())
+    {
+        <h1>Outstanding Flagged Claims</h1>
+        <p>Please carefully inspect these claims as they have violated one or many of our policies </p>
+
+        if(Model.FlaggedFT.Any())
+        {
+            <h2>Full Time Claims</h2>
+            <p></p>
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <body>
     <h1>Outstanding Claims</h1>
     @if (Model == null || !Model.Any())
     {
@@ -98,4 +221,4 @@
             </tbody>
         </table>
     }
-</body>
+</body> *@
