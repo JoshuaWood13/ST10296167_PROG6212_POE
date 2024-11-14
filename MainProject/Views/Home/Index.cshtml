@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var accountType = Context.Session.GetString("AccountType");
-    var accountID = Context.Session.GetInt32("AccountID");
+    var accountType = ViewData["AccountType"];
+    var accountID = ViewData["UserId"];
 }
 
 <head>

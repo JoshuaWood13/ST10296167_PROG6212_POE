@@ -66,23 +66,20 @@ namespace ST10296167_PROG6212_POE.Controllers
 
             //var verifiedClaims = await _claimApiService.GetVerifiedClaimsAsync();
 
-            //IEnumerable<Claims> claims;
             SortedClaims claims;
 
-                if (accountType == "Programme Coordinator")
-                {
-                    claims = await _claimApiService.GetClaimsPCAsync();
+            if (accountType == "Programme Coordinator")
+            {
+                claims = await _claimApiService.GetClaimsPCAsync();
 
-                //claims = verifiedClaims.Where(c => c.ApprovalPC == 0).ToList();
             }
-                else if (accountType == "Academic Manager")
-                {
-                claims = await _claimApiService.GetClaimsAMAsync();
-                //claims = verifiedClaims.Where(c => c.ApprovalPC == 1 && c.ApprovalAM == 0).ToList();
+            else if (accountType == "Academic Manager")
+            {
+            claims = await _claimApiService.GetClaimsAMAsync();
             }
-                else
-                {
-                    claims = null;
+            else
+            {
+                claims = null;
             }
             return View(claims);
         }

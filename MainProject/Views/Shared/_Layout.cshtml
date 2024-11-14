@@ -33,9 +33,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
-                        @if (@Context.Session.GetInt32("IsLoggedIn") == 1)
+                        @if (@* @Context.Session.GetInt32("IsLoggedIn") == 1 *@ User.Identity.IsAuthenticated)
                         {
-                            if (Context.Session.GetString("AccountType") == "Lecturer")
+                            if (@* Context.Session.GetString("AccountType") == "Lecturer" *@ User.IsInRole("Lecturer"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -53,7 +53,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                                 </li>
                             }
-                            else if (Context.Session.GetString("AccountType") == "Academic Manager")
+                            else if (@* Context.Session.GetString("AccountType") == "Academic Manager" *@ User.IsInRole("Academic Manager"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -65,7 +65,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                                 </li>
                             }
-                            else if (Context.Session.GetString("AccountType") == "Programme Coordinator")
+                            else if (@* Context.Session.GetString("AccountType") == "Programme Coordinator" *@ User.IsInRole("Programme Coordinator"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>

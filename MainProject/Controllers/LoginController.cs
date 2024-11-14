@@ -9,17 +9,21 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.AspNetCore.Identity;
 
 namespace ST10296167_PROG6212_POE.Controllers
 {
     public class LoginController : Controller
     {
         private readonly AppDbContext _context;
-
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public LoginController(AppDbContext context)
+        public LoginController(AppDbContext context, SignInManager<User> signInManager, UserManager<User> userManager)
         {
+            _signInManager = signInManager;
+            _userManager = userManager;
             _context = context;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
@@ -33,7 +37,8 @@ namespace ST10296167_PROG6212_POE.Controllers
 
         public ActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            //HttpContext.Session.Clear();
+            _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Login");
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
@@ -41,29 +46,81 @@ namespace ST10296167_PROG6212_POE.Controllers
         // Methods
         //------------------------------------------------------------------------------------------------------------------------------------------//
         // This method handles logging in a valid user and setting the correct session values
+        //[HttpPost]
+        //public IActionResult LoginUser(string Account, Login login)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View("Login", login); 
+        //    }
+
+        //    bool loginSuccessful = ValidateUser(Account, login.AccountID, login.Password);
+
+        //    if (loginSuccessful)
+        //    {
+        //        // Set session variables
+        //        HttpContext.Session.SetString("AccountType", Account);
+        //        HttpContext.Session.SetInt32("IsLoggedIn", 1);
+        //        HttpContext.Session.SetInt32("AccountID", login.AccountID);
+
+        //        return RedirectToAction("Index", "Home");
+        //    }
+
+        //    TempData["Error"] = "Incorrect Account ID or password";
+        //    ModelState.Clear();
+        //    return View("Login");
+        //}
+
         [HttpPost]
-        public IActionResult LoginUser(string Account, Login login)
+        public async Task<IActionResult> LoginUser(Login login)
         {
-            if (!ModelState.IsValid)
+            //if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(password))
+            //{
+            //    TempData["Error"] = "Please provide both User ID and password.";
+            //    return View("Login");
+            //}
+
+            // Find user by UserId
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserId == login.AccountID.ToString());
+
+            if (user != null)
             {
-                return View("Login", login); 
-            }
+                // Check if the password is correct using UserManager
+                var isPasswordValid = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
-            bool loginSuccessful = ValidateUser(Account, login.AccountID, login.Password);
+                if (isPasswordValid.Succeeded)
+                {
+                    // Sign in the user
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 
-            if (loginSuccessful)
-            {
-                // Set session variables
-                HttpContext.Session.SetString("AccountType", Account);
-                HttpContext.Session.SetInt32("IsLoggedIn", 1);
-                HttpContext.Session.SetInt32("AccountID", login.AccountID);
+                    //HttpContext.Session.SetString("AccountType", "Lecturer");
+                    //HttpContext.Session.SetInt32("IsLoggedIn", 1);
 
-                return RedirectToAction("Index", "Home");
+                    // Redirect to the home page after successful login
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             TempData["Error"] = "Incorrect Account ID or password";
             ModelState.Clear();
             return View("Login");
+
+            //if (user == null)
+            //{
+            //    TempData["Error"] = "Account ID not found.";
+            //    return View("Login");
+            //}
+
+            //// Use the found user's UserName for login
+            //var result = await _signInManager.PasswordSignInAsync(user.UserName, password, isPersistent: false, lockoutOnFailure: false);
+
+            //if (result.Succeeded)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            //TempData["Error"] = "Incorrect Account ID or password";
+            //return View("Login");
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------//
