@@ -5,12 +5,11 @@ namespace ST10296167_PROG6212_POE.Models
 {
     public class User : IdentityUser
     {
-        [Required]
-        [StringLength(10)]
-        public string UserId { get; set; }
+        //[Required]
+        //[StringLength(10)]
+        //public string UserId { get; set; }
 
         // Full Name (First Name)
-        [Required]
         [StringLength(100)]
         public string FirstName { get; set; }
 
@@ -31,5 +30,8 @@ namespace ST10296167_PROG6212_POE.Models
         // Address
         [StringLength(500)]
         public string Address { get; set; }
+
+        public string? UserId { get; set; }
+
     }
 }

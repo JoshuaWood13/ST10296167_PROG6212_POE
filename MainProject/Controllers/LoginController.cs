@@ -81,7 +81,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             //}
 
             // Find user by UserId
-            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserId == login.AccountID.ToString());
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.Id == login.AccountID.ToString());
 
             if (user != null)
             {
@@ -125,31 +125,31 @@ namespace ST10296167_PROG6212_POE.Controllers
 
         //------------------------------------------------------------------------------------------------------------------------------------------//
         // This method validates that the account ID and password input, matches a created account
-        private bool ValidateUser(string accountType, int accountID, string password)
-        {
+        //private bool ValidateUser(string accountType, int accountID, string password)
+        //{
 
-            if (accountType == "Lecturer")
-            {
-                var lecturer = _context.Lecturers
-                    .FirstOrDefault(l => l.LecturerID == accountID && l.Password == password);
-                return lecturer != null;
-            }
-            else if (accountType == "Academic Manager")
-            {
-                var academicManager = _context.AcademicManagers
-                    .FirstOrDefault(am => am.AM_ID == accountID && am.Password == password);
-                return academicManager != null;
-            }
-            else if (accountType == "Programme Coordinator")
-            {
-                var programmeCoordinator = _context.ProgrammeCoordinators
-                    .FirstOrDefault(pm => pm.PM_ID == accountID && pm.Password == password);
-                return programmeCoordinator != null;
-            }
+        //    if (accountType == "Lecturer")
+        //    {
+        //        var lecturer = _context.Lecturers
+        //            .FirstOrDefault(l => l.LecturerID == accountID && l.Password == password);
+        //        return lecturer != null;
+        //    }
+        //    else if (accountType == "Academic Manager")
+        //    {
+        //        var academicManager = _context.AcademicManagers
+        //            .FirstOrDefault(am => am.AM_ID == accountID && am.Password == password);
+        //        return academicManager != null;
+        //    }
+        //    else if (accountType == "Programme Coordinator")
+        //    {
+        //        var programmeCoordinator = _context.ProgrammeCoordinators
+        //            .FirstOrDefault(pm => pm.PM_ID == accountID && pm.Password == password);
+        //        return programmeCoordinator != null;
+        //    }
 
-            return false; 
+        //    return false; 
 
-        }
+        //}
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }

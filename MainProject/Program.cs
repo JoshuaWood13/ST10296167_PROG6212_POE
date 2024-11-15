@@ -94,7 +94,7 @@ namespace ST10296167_PROG6212_POE
                     // Create default users
                     var lecturer = new User
                     {
-                        UserId = "L001",
+                        Id = "L001",
                         UserName = "lecturer@example.com",
                         Email = "lecturer@example.com",
                         FirstName = "John",
@@ -105,7 +105,7 @@ namespace ST10296167_PROG6212_POE
 
                     var pc = new User
                     {
-                        UserId = "PC001",
+                        Id = "PC001",
                         UserName = "pc@example.com",
                         Email = "pc@example.com",
                         FirstName = "Jane",
@@ -116,7 +116,7 @@ namespace ST10296167_PROG6212_POE
 
                     var am = new User
                     {
-                        UserId = "AM001",
+                        Id = "AM001",
                         UserName = "am@example.com",
                         Email = "am@example.com",
                         FirstName = "Bob",
@@ -127,7 +127,7 @@ namespace ST10296167_PROG6212_POE
 
                     var hr = new User
                     {
-                        UserId = "HR001",
+                        Id = "HR001",
                         UserName = "hr@example.com",
                         Email = "hr@example.com",
                         FirstName = "Mary",

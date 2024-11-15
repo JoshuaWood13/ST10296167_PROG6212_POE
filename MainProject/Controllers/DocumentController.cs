@@ -4,6 +4,7 @@
 // References:
 // C# Corner. 2024. Restrict Uploaded File Size in ASP.NET Core, [Online]. Available at: https://www.c-sharpcorner.com/article/restrict-uploaded-file-size-in-asp-net-core2/ [Accessed 10 Oct. 2024].
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ST10296167_PROG6212_POE.Data;
 using ST10296167_PROG6212_POE.Models;
@@ -14,12 +15,14 @@ namespace ST10296167_PROG6212_POE.Controllers
     public class DocumentController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public DocumentController(AppDbContext context)
+        public DocumentController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -38,7 +41,9 @@ namespace ST10296167_PROG6212_POE.Controllers
         [RequestSizeLimit(5000000)] // Limit file size to 5 MB (C# Corner, 2024).
         public async Task<IActionResult> UploadDocs(Documents document, IFormFile File)
         {
-            var lecturerID = HttpContext.Session.GetInt32("AccountID");
+            //var lecturerID = HttpContext.Session.GetInt32("AccountID");
+            var user = await _userManager.GetUserAsync(User);
+            var lecturerID = user.Id;
 
             var claim = await _context.Claims.FindAsync(document.ClaimID);
             if (claim == null || claim.LecturerID != lecturerID)

@@ -8,6 +8,7 @@ using ST10296167_PROG6212_POE.Models;
 using ST10296167_PROG6212_POE.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace ST10296167_PROG6212_POE.Controllers
 {
@@ -15,13 +16,15 @@ namespace ST10296167_PROG6212_POE.Controllers
     {
         private readonly AppDbContext _context;
         private readonly ClaimApiService _claimApiService;
+        private readonly UserManager<User> _userManager;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public ClaimController(AppDbContext context, ClaimApiService claimApiService)
+        public ClaimController(AppDbContext context, ClaimApiService claimApiService, UserManager<User> userManager)
         {
             _context = context;
             _claimApiService = claimApiService;
+            _userManager = userManager;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -33,7 +36,12 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
         public async Task<IActionResult> ViewClaims()
         {
-            var lecturerID = HttpContext.Session.GetInt32("AccountID");
+            //var lecturerID = HttpContext.Session.GetInt32("AccountID");
+            var user = await _userManager.GetUserAsync(User);
+            var lecturerID = user.Id;
+
+            //var user = await _userManager.GetUserAsync(User);
+            //var lecturerID = user.UserId;
 
             var claims = await _context.Claims.Where(c => c.LecturerID == lecturerID).ToListAsync();
             return View(claims);
@@ -62,7 +70,10 @@ namespace ST10296167_PROG6212_POE.Controllers
 
         public async Task<IActionResult> VerifyClaims()
         {
-            var accountType = HttpContext.Session.GetString("AccountType");
+            //var accountType = HttpContext.Session.GetString("AccountType");
+
+            var accountType = new[] { "Academic Manager", "Programme Coordinator" }
+            .FirstOrDefault(role => User.IsInRole(role));
 
             //var verifiedClaims = await _claimApiService.GetVerifiedClaimsAsync();
 
@@ -75,7 +86,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             }
             else if (accountType == "Academic Manager")
             {
-            claims = await _claimApiService.GetClaimsAMAsync();
+                claims = await _claimApiService.GetClaimsAMAsync();
             }
             else
             {
@@ -99,11 +110,13 @@ namespace ST10296167_PROG6212_POE.Controllers
         public async Task<IActionResult> SubmitClaim(Claims model)
         {
             double amount = model.HourlyRate * model.HoursWorked;
-            var lecturerID = HttpContext.Session.GetInt32("AccountID");
+            var user = await _userManager.GetUserAsync(User);
+            var lecturerID = user.Id;
+            //var lecturerID = HttpContext.Session.GetInt32("AccountID");
 
             var claim = new Claims
             {
-                LecturerID = (int)lecturerID,
+                LecturerID = lecturerID,
                 HourlyRate = model.HourlyRate,
                 HoursWorked = model.HoursWorked,
                 ClaimAmount = amount,
@@ -121,7 +134,10 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public IActionResult ReturnToVerifyClaims()
         {
-            if (HttpContext.Session.GetString("AccountType") == "Lecturer")
+            var accountType = new[] { "Lecturer", "Academic Manager", "Programme Coordinator", "Human Resources" }
+            .FirstOrDefault(role => User.IsInRole(role)) ?? "Unknown";
+
+            if (accountType == "Lecturer")
             {
                 return RedirectToAction("ViewClaims");
             }
@@ -132,7 +148,9 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> ProcessClaim(int claimID, string action)
         {
-            var account = HttpContext.Session.GetString("AccountType");
+            //var account = HttpContext.Session.GetString("AccountType");
+            var account = new[] { "Lecturer", "Academic Manager", "Programme Coordinator", "Human Resources" }
+            .FirstOrDefault(role => User.IsInRole(role)) ?? "Unknown";
             var claim = await _context.Claims.FindAsync(claimID);
 
             if (account == "Programme Coordinator")

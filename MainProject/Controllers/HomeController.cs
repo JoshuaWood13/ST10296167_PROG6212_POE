@@ -32,14 +32,12 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return RedirectToAction("Login", "Login");
             }
             var user = await _userManager.GetUserAsync(User);
-            var userId = user?.UserId;
+            var userID = user.Id;
 
-            var accountType = User.IsInRole("Lecturer") ? "Lecturer" :
-                       User.IsInRole("Academic Manager") ? "Academic Manager" :
-                       User.IsInRole("Programme Coordinator") ? "Programme Coordinator" :
-                       "Unknown";
+            var accountType = new[] { "Lecturer", "Academic Manager", "Programme Coordinator", "Human Resources" }
+            .FirstOrDefault(role => User.IsInRole(role)) ?? "Unknown";
 
-            ViewData["UserId"] = userId;
+            ViewData["UserId"] = userID;
             ViewData["AccountType"] = accountType;
             return View();
         }

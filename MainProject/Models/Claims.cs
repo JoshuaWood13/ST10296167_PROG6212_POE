@@ -4,6 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ST10296167_PROG6212_POE.Models
 {
@@ -12,8 +13,8 @@ namespace ST10296167_PROG6212_POE.Models
         [Key]
         public int ClaimID { get; set; }
 
-        [ForeignKey("Lecturers")]
-        public int LecturerID { get; set; }
+        [ForeignKey("User")]
+        public string LecturerID { get; set; }
 
         [Required(ErrorMessage = "Please enter an hourly rate")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Hourly rate must be above 0")]  
@@ -38,7 +39,9 @@ namespace ST10296167_PROG6212_POE.Models
         [Range(0, 1)]
         public int ApprovalAM { get; set; }
 
-        public Lecturers Lecturers { get; set; }  // Navigation property to the Lecturers model
+        /*public Lecturers Lecturers { get; set; }*/  // Navigation property to the Lecturers model
+        [JsonIgnore]
+        public User User { get; set; }  // Updated to reference IdentityUser (User)
 
         public ICollection<Documents> Documents { get; set; }  // Navigation property to the Documents model
 
@@ -56,8 +59,6 @@ namespace ST10296167_PROG6212_POE.Models
                     return "Approved";
                 else if (ApprovalPC == 1 && ApprovalAM == 2)
                     return "Rejected";
-                //else if (ApprovalPC == 3 && ApprovalAM == 3)
-                //    return "Invalid";
                 else
                     return "Error"; 
             }

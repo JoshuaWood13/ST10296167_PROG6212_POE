@@ -65,7 +65,7 @@
 
 
 <h1>Outstanding Valid Claims</h1>
-@if (Model == null)
+@if (Model == null || !Model.FullTime.Any() && !Model.PartTime.Any() && !Model.FlaggedFT.Any() && !Model.FlaggedPT.Any())
 {
     <p>There are currently no outstanding claims.</p>
 }
