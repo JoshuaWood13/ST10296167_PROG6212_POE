@@ -45,6 +45,8 @@ namespace ST10296167_PROG6212_POE
                     // Custom control, so no need for default redirect paths
              });
 
+            builder.Services.AddRazorPages();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -64,6 +66,8 @@ namespace ST10296167_PROG6212_POE
             app.UseAuthorization();
 
             app.UseSession();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

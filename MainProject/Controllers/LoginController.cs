@@ -97,7 +97,16 @@ namespace ST10296167_PROG6212_POE.Controllers
                     //HttpContext.Session.SetInt32("IsLoggedIn", 1);
 
                     // Redirect to the home page after successful login
-                    return RedirectToAction("Index", "Home");
+                    if (await _userManager.IsInRoleAsync(user, "Human Resources"))
+                    {
+                        // Redirect to the HR dashboard page if the user is in the "HR" role
+                        return RedirectToPage("/IndexHR");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    //return RedirectToAction("Index", "Home");
                 }
             }
 

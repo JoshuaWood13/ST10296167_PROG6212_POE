@@ -77,6 +77,15 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                                 </li>
                             }
+                            else if (User.IsInRole("Human Resources"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/IndexHR">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                                </li>
+                            }
                         }
                         else
                         {
