@@ -65,7 +65,7 @@ namespace ST10296167_PROG6212_POE
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseSession();
+            //app.UseSession();
 
             app.MapRazorPages();
 

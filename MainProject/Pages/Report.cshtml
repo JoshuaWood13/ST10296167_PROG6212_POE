@@ -1,0 +1,141 @@
+﻿@page
+@model ST10296167_PROG6212_POE.Pages.ReportModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-family: 'Eras ITC',sans-serif;
+            color: deeppink;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        body {
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+
+        label {
+            padding-left: 20px;
+            padding-right: 20px;
+            font-weight: bold;
+            font-size: 30px;
+            padding-bottom: 15px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid grey;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: limegreen;
+            font-weight: bold;
+        }
+
+        tr {
+            background-color: white;
+        }
+
+        button {
+            background-color: dodgerblue;
+            height:60px;
+            width:300px;
+            font-weight:bold;
+            border-radius: 20px;
+            font-size: 30px;
+            margin-top: 15px;
+        }
+
+        p {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: darkblue;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/IndexHR" class="back-button">Back</a>
+
+    <h1>Report</h1>
+    @if (!Model.FilteredClaims.Any())
+    {
+        <p>No Approved Claims were found</p>
+    }
+    else
+    {
+      
+    double total = 0; // Initialize the total variable
+    
+    foreach (var claim in Model.FilteredClaims)
+    {
+       total +=  claim.ClaimAmount;
+    }
+    
+        double average = total / Model.FilteredClaims.Count() ;
+
+    <div>
+        <label>Total Claims Value: R @total</label>
+        <label>Average Claim Amount: R @average</label> <br />
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Lecturer ID</th>
+                <th>Claim Month</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Amount Due</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model.FilteredClaims)
+            {
+                <tr>
+                    <td>@claim.ClaimID</td>
+                    <td>@claim.LecturerID</td>
+                    <td>@claim.ClaimMonth</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate</td>
+                    <td>@claim.ClaimAmount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button>Process Claims</button>
+    }
+</body>

@@ -87,43 +87,44 @@
 </head>
 
 <body>
+
     <h1>HR Dashboard</h1>
 
     <div class="inputBorder">
         <div class="element">
             <h2>Claim Processing</h2>
 
-            <label>Lecturer ID:</label> <br />
-            @* <input type="text" value="All"/> <br /> *@
-            <select id="lecturerSelect" onchange="toggleLecturerInput()">
-                <option value="All">All</option>
-                <option value="Custom">Custom Lecturer ID</option>
-            </select> <br />
-            <input id="lecturerInput" type="text" value="" disabled placeholder="Enter Lecturer ID" /> <br />
-            <label>Claim Month:</label> <br />
-            <select>
-                <option value="All">All</option>
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-            </select> <br />
-            <label>Claim Value Range</label> <br />
-            <select>
-                <option value="0">All</option>
-                <option value="1">Below R5000</option>
-                <option value="2">R5000 - R20 000</option>
-                <option value="3">Above R20 000</option>
-            </select> <br /> <br />
-            <button class="b1">Generate Report</button>
+            <form asp-page="IndexHR" method="post">
+                @Html.AntiForgeryToken()
+
+
+                <label>Claim Month:</label> <br />
+                <select name="Month">
+                    <option value="All">All</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select> <br />
+
+                <label>Claim Value Range</label> <br />
+                <select name="Range">
+                    <option value="0">All</option>
+                    <option value="1">Below R5000</option>
+                    <option value="2">R5000 - R20 000</option>
+                    <option value="3">Above R20 000</option>
+                </select> <br /> <br />
+
+                <button class="b1" type="submit">Generate Report</button>
+            </form>
         </div>
 
         <div class="divider"></div>
@@ -137,16 +138,16 @@
         </div>
     </div>
 </body>
-
-<script>
+@* <script>
     function toggleLecturerInput() {
         var lecturerSelect = document.getElementById('lecturerSelect');
         var lecturerInput = document.getElementById('lecturerInput');
 
         if (lecturerSelect.value === 'Custom') {
-            lecturerInput.disabled = false;  // Enable input
+            lecturerInput.disabled = false;  
         } else {
-            lecturerInput.disabled = true;   // Disable input
+            lecturerInput.disabled = true;   
+            lecturerInput.value = '';
         }
     }
-</script>
+</script> *@
