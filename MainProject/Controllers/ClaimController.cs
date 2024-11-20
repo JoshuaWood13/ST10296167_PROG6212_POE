@@ -46,7 +46,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             var claims = await _context.Claims.Where(c => c.LecturerID == lecturerID).ToListAsync();
             return View(claims);
         }
-
+         
         //public async Task<IActionResult> VerifyClaims()
         //{
         //    var accountType = HttpContext.Session.GetString("AccountType");

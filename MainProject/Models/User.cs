@@ -21,10 +21,12 @@ namespace ST10296167_PROG6212_POE.Models
         // Email (Already included in IdentityUser, but you can also make it a required field)
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[^@\s]+@example\.com$", ErrorMessage = "The email must end with '@email.com'.")]
         public override string Email { get; set; }
 
         // Phone Number (Already included in IdentityUser)
         [Phone]
+         [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number must be 10 digits.")]
         public override string PhoneNumber { get; set; }
 
         // Address

@@ -28,5 +28,19 @@ namespace ST10296167_PROG6212_POE.Pages
         {
             return RedirectToPage("/Report", new { month = Month, range = Range });
         }
+
+        // New handler method for searching lecturer data
+        public IActionResult OnPostSearchLecturer()
+        {
+            if (string.IsNullOrEmpty(LecturerID))
+            {
+                // Handle the case where the Lecturer ID is missing or invalid.
+                ModelState.AddModelError(string.Empty, "Please enter a valid Lecturer ID.");
+                return Page();
+            }
+
+            // Redirect to the LecturerData page, passing the Lecturer ID as a query parameter.
+            return RedirectToPage("/LecturerData", new { lecturerID = LecturerID });
+        }
     }
 }

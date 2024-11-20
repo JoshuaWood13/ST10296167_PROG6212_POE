@@ -100,7 +100,7 @@ namespace ST10296167_PROG6212_POE.Controllers
                     if (await _userManager.IsInRoleAsync(user, "Human Resources"))
                     {
                         // Redirect to the HR dashboard page if the user is in the "HR" role
-                        return RedirectToPage("/IndexHR");
+                        return RedirectToAction("Dashboard", "HR");
                     }
                     else
                     {

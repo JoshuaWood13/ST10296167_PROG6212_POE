@@ -1,9 +1,4 @@
-﻿@page
-@model ST10296167_PROG6212_POE.Pages.IndexHRModel
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<head>
+﻿<head>
     <style>
         h1 {
             font-size: 50px;
@@ -33,8 +28,9 @@
             border-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 1000px;
-            height: 500px;
+            height: 400px;
             margin: 0 auto;
+            margin-bottom: 20px;
         }
 
         .element {
@@ -67,8 +63,8 @@
         }
 
         .b1 {
-            font-size:20px;
-            background-color:deepskyblue;
+            font-size: 20px;
+            background-color: deepskyblue;
             height: 50px;
             width: 200px;
             border-radius: 10px;
@@ -94,9 +90,7 @@
         <div class="element">
             <h2>Claim Processing</h2>
 
-            <form asp-page="IndexHR" method="post">
-                @Html.AntiForgeryToken()
-
+            <form asp-action="GenerateReport" method="post">
 
                 <label>Claim Month:</label> <br />
                 <select name="Month">
@@ -131,29 +125,42 @@
 
         <div class="element">
             <h2>Manage Lecturer Data</h2>
-            <form method="post">
+            <form asp-action="Search" method="post">
                 <label>Lecturer ID:</label> <br />
-                <input type="text" id="lecturerID" /> <br /> <br />
-                <button class="b2" id="searchButton" type="submit" >Search</button>
+                <input type="text" id="lecturerID" name="LecturerID" /> <br /> <br />
+                <button class="b2" id="searchButton" type="submit">Search</button>
             </form>
             @* <label>Lecturer ID:</label> <br />
             <input type="text" id="lecturerID"/> <br /> <br />
             <button class="b2" id="searchButton">Search</button> *@
         </div>
     </div>
+@*     @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" id="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    } *@
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" id="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" id="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
 </body>
-@* <script>
-    // Attach a click event listener to the "Search" button
-    document.getElementById('searchButton').addEventListener('click', function () {
-        // Get the value of the Lecturer ID input
-        var lecturerID = document.getElementById('lecturerID').value;
 
-        // Check if the Lecturer ID is not empty
-        if (lecturerID) {
-            // Redirect to the LecturerData page, passing the Lecturer ID as a query parameter
-            window.location.href = '/LecturerData?lecturerID=' + encodeURIComponent(lecturerID);
-        } else {
-            alert("Please enter a valid Lecturer ID");
+<script>
+    // Hide the alert after 3 seconds
+    setTimeout(function () {
+        var alert = document.getElementById('alert');
+        if (alert) {
+            alert.style.display = 'none';
         }
-    });
-</script> *@
+    }, 3000); // 3 seconds
+</script>

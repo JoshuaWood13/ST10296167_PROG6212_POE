@@ -30,7 +30,9 @@ namespace ST10296167_PROG6212_POE
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddSession();
+            builder.Services.AddRazorPages();
+
+            //builder.Services.AddSession();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -45,7 +47,7 @@ namespace ST10296167_PROG6212_POE
                     // Custom control, so no need for default redirect paths
              });
 
-            builder.Services.AddRazorPages();
+            //builder.Services.AddRazorPages();
 
             var app = builder.Build();
 

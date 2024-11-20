@@ -1,0 +1,131 @@
+﻿@* @model Microsoft.AspNetCore.Identity.IdentityUser *@
+@model ST10296167_PROG6212_POE.Models.User
+
+<head>
+    <style>
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-family: 'Eras ITC',sans-serif;
+            color: deeppink;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        body {
+            text-align: center;
+            background-color: blanchedalmond;
+        }
+
+        .inputBorder {
+            display: inline-block;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border: 2px solid darkgray;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 700px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        .divv {
+            border-bottom: 4px solid darkgray;
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+            border-radius: 10px;
+            height: 40px;
+        }
+
+        .addy {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            height: 40px;
+            width: 300px;
+        }
+
+        .attributes {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        button {
+            font-size: 20px;
+            background-color: lawngreen;
+            height: 50px;
+            width: 200px;
+            border-radius: 10px;
+            font-weight: bolder;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: darkblue;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+                background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="@Url.Action("Dashboard", "HR")" class="back-button">Back</a>
+
+    <h1>Update Lecturer Information</h1>
+    <div class="inputBorder">
+        <div class="divv">
+            <h2>Lecturer @Model.Id</h2>
+            <label style="font-size: 20px;">@Model.FirstName @Model.LastName</label>
+            <p></p>
+        </div>
+        
+        <form method="post" asp-action="UpdateLecturerData">
+            <div>
+                <label class="attributes">Email:</label> <br />
+                <input type="email" id="email" name="Email" value="@Model.Email" required/> <br />
+                <span asp-validation-for="Email" style="color:red;"></span> <br />
+
+                <label class="attributes">Phone Number:</label> <br />
+                <input type="tel" id="phoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" required/> <br />
+                <span asp-validation-for="PhoneNumber" style="color:red;"></span> <br />
+
+                <label class="attributes">Address:</label> <br />
+                <input class="addy" id="address" name="Address" value="@Model.Address" required/> @* <br /> <br /> *@
+                <span asp-validation-for="Address" style="color:red;"></span> <br /> <br />
+
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="FirstName" value="@Model.FirstName" />
+                <input type="hidden" name="LastName" value="@Model.LastName" />
+
+                <button type="submit">Save Changes </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
