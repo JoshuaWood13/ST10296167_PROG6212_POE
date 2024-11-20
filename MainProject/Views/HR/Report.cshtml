@@ -3,14 +3,14 @@
 <head>
     <style>
         h1 {
-            font-size: 60px;
+            font-size: 70px;
             margin-bottom: 20px;
             font-family: 'Eras ITC',sans-serif;
             color: deeppink;
         }
 
         h2 {
-            font-size: 40px;
+            font-size: 50px;
             font-family: 'Eras ITC',sans-serif;
             margin-bottom: 20px;
         }
@@ -21,11 +21,8 @@
         }
 
         label {
-            /* padding-left: 20px;
-            padding-right: 20px;
-            font-weight: bold;
-            font-size: 30px;
-            padding-bottom: 15px; */
+            font-size: 25px;
+            margin-top: 0px;
         }
 
         table {
@@ -65,6 +62,7 @@
         p {
             font-size: 25px;
             font-weight: bold;
+            margin-bottom: 5px;
         }
 
         .back-button {
@@ -90,8 +88,8 @@
             background-color: white;
             border-radius: 100px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            height: 300px;
+            width: 500px;
+            height: 330px;
             margin-bottom: 20px;
             margin-left: 20px;
             margin-right: 20px;
@@ -99,6 +97,7 @@
 
         h3 {
             font-weight: bolder;
+            font-size: 35px;
         }
     </style>
 </head>
@@ -147,21 +146,21 @@
         </table>
         <h2>Summary</h2>
         <div class="inputBorder">
-            <h3>Total</h3>
+            <h3 style="color:deepskyblue">Total</h3>
             <label>Claims</label> <br />
-            <p>@Model.TotalClaimsCount</p> <br />
+            <p>@Model.TotalClaimsCount</p> 
             <label>Claims Value</label> <br />
-            <p>R @Model.TotalClaimsValue</p> <br />
+            <p>R @Model.TotalClaimsValue</p> 
             <label>Hours Worked</label> <br />
             <p>@Model.TotalHoursWorked hours</p>
         </div>
 
         <div class="inputBorder">
-            <h3>Average</h3>
+            <h3 style="color: darkorange">Average</h3>
             <label>Claim Value</label> <br />
-            <p>R @Model.AverageClaimAmount</p> <br />
+            <p>R @Model.AverageClaimAmount</p> 
             <label>Hours Worked</label> <br />
-            <p>@Model.AverageHoursWorked hours</p> <br />
+            <p>@Model.AverageHoursWorked hours</p> 
             <label>Hourly Rate</label> <br />
             <p>R @Model.AverageHourlyRate</p>
         </div>

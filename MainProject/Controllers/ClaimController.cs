@@ -9,6 +9,7 @@ using ST10296167_PROG6212_POE.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using ST10296167_PROG6212_POE.Migrations;
 
 namespace ST10296167_PROG6212_POE.Controllers
 {
@@ -124,7 +125,10 @@ namespace ST10296167_PROG6212_POE.Controllers
                 Description = model.Description
             };
 
-            await _context.Claims.AddAsync(claim);
+            // AUTO VAL HERE
+            var verifiedClaim = AutoVerify(claim);
+
+            await _context.Claims.AddAsync(verifiedClaim);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("ViewClaims");
@@ -185,6 +189,20 @@ namespace ST10296167_PROG6212_POE.Controllers
             }
             await _context.SaveChangesAsync();
             return RedirectToAction("VerifyClaims"); 
+        }
+
+        // This method auto verifies and approves a claim if it meets the predefined criteria
+        public Claims AutoVerify(Claims claim)
+        {
+            if(claim.HoursWorked > 50)
+            {
+                return claim;
+            }
+            else if (claim.HourlyRate < 150)
+            {
+                claim.ApprovalPC = 3;
+            }
+            return claim;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }

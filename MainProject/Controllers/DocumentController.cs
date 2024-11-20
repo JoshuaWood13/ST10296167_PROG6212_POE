@@ -38,7 +38,7 @@ namespace ST10296167_PROG6212_POE.Controllers
         //------------------------------------------------------------------------------------------------------------------------------------------//
         // This method handles checking and uploading a valid file to a valid claim
         [HttpPost]
-        [RequestSizeLimit(5000000)] // Limit file size to 5 MB (C# Corner, 2024).
+      /*  [RequestSizeLimit(5000000)]*/ // Limit file size to 5 MB (C# Corner, 2024).
         public async Task<IActionResult> UploadDocs(Documents document, IFormFile File)
         {
             //var lecturerID = HttpContext.Session.GetInt32("AccountID");
@@ -61,6 +61,13 @@ namespace ST10296167_PROG6212_POE.Controllers
 
             if (File == null || File.Length <= 0)
             {
+                return View("UploadDocuments", document);
+            }
+
+            // Check that file size is not above 5MB
+            if (File.Length > 5 * 1024 * 1024)
+            {
+                TempData["Error"] = "File size must be 5 MB or less.";
                 return View("UploadDocuments", document);
             }
 

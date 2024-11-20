@@ -76,20 +76,6 @@
 <body>
     <h1>Upload Supporting Documents</h1>
     <h2>Please upload any documents to support your claim</h2>
-    <div class="inputBorder">
-        <form asp-action="UploadDocs" method="post" enctype="multipart/form-data">
-            <p>Link to Claim ID:</p>
-            <input asp-for="ClaimID" class="IDLink" required/>
-            <span asp-validation-for="ClaimID" class="text-danger"></span>
-
-            <p>Select Document Files:</p>
-            <input type="file" name="File" accept=".pdf, .docx, .xlsx, .txt" />
-            <span asp-validation-for="FileData" class="text-danger"></span>
-
-            <button type="submit"><strong>Submit Files</strong></button>
-        </form>
-    </div>
-    <br /><br />
     @if (TempData["Success"] != null)
     {
         <div id="alert" class="alert alert-success">
@@ -103,4 +89,31 @@
             @TempData["Error"]
         </div>
     }
+    <div class="inputBorder">
+        <form asp-action="UploadDocs" method="post" enctype="multipart/form-data">
+            <p>Link to Claim ID:</p>
+            <input asp-for="ClaimID" class="IDLink" required/>
+            <span asp-validation-for="ClaimID" class="text-danger"></span>
+
+            <p>Select Document Files:</p>
+            <input type="file" name="File" accept=".pdf, .docx, .xlsx, .txt" />
+            <span asp-validation-for="FileData" class="text-danger"></span>
+
+            <button type="submit"><strong>Submit Files</strong></button>
+        </form>
+    </div>
+@*     <br /><br />
+    @if (TempData["Success"] != null)
+    {
+        <div id="alert" class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div id="alert" class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    } *@
 </body>

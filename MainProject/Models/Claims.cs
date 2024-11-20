@@ -51,6 +51,8 @@ namespace ST10296167_PROG6212_POE.Models
             {
                 if (ApprovalPC == 0 && ApprovalAM == 0)
                     return "Pending (0/2)";
+                else if (ApprovalPC == 3)
+                    return "Approved (Auto)";
                 else if (ApprovalPC == 2)
                     return "Rejected";
                 else if (ApprovalPC == 1 && ApprovalAM == 0)

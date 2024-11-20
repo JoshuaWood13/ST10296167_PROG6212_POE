@@ -85,7 +85,18 @@
 <body>
 
     <h1>HR Dashboard</h1>
-
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" id="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" id="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
     <div class="inputBorder">
         <div class="element">
             <h2>Claim Processing</h2>
@@ -135,13 +146,7 @@
             <button class="b2" id="searchButton">Search</button> *@
         </div>
     </div>
-@*     @if (ViewBag.ErrorMessage != null)
-    {
-        <div class="alert alert-danger" id="alert">
-            @ViewBag.ErrorMessage
-        </div>
-    } *@
-    @if (TempData["ErrorMessage"] != null)
+@*     @if (TempData["ErrorMessage"] != null)
     {
         <div class="alert alert-danger" id="alert">
             @TempData["ErrorMessage"]
@@ -152,7 +157,7 @@
         <div class="alert alert-success" id="alert">
             @TempData["SuccessMessage"]
         </div>
-    }
+    } *@
 </body>
 
 <script>
