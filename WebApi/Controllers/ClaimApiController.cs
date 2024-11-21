@@ -11,11 +11,18 @@ namespace WebApi.Controllers
     public class ClaimApiController : ControllerBase
     {
         private readonly AppDbContext _context;
+
+        // Controller
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public ClaimApiController(AppDbContext context)
         {
             _context = context;
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
 
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method gets all claims needing PC approval, sort them, and then return them
         [HttpGet("GetClaimsPC")]
         public async Task<ActionResult<SortedClaims>> GetClaimsPC()
         {
@@ -31,6 +38,7 @@ namespace WebApi.Controllers
             }
         }
 
+        // This method gets all claims needing AM approval, sort them, and then return them
         [HttpGet("GetClaimsAM")]
         public async Task<ActionResult<SortedClaims>> GetClaimsAM()
         {
@@ -46,6 +54,7 @@ namespace WebApi.Controllers
             }
         }
 
+        // This method checks submitted claims against pre-defined criteria in order to sort them and flag claims outside the norm for closer inspection
         private SortedClaims AutoCheckClaims(List<Claims> claims)
         {
             var sortedClaims = new SortedClaims();
@@ -74,7 +83,7 @@ namespace WebApi.Controllers
             }
             return sortedClaims;
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
 //--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

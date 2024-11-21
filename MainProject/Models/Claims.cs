@@ -39,9 +39,8 @@ namespace ST10296167_PROG6212_POE.Models
         [Range(0, 1)]
         public int ApprovalAM { get; set; }
 
-        /*public Lecturers Lecturers { get; set; }*/  // Navigation property to the Lecturers model
         [JsonIgnore]
-        public User User { get; set; }  // Updated to reference IdentityUser (User)
+        public User User { get; set; }  
 
         public ICollection<Documents> Documents { get; set; }  // Navigation property to the Documents model
 

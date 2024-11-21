@@ -38,7 +38,6 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadDocs(Documents document, IFormFile File)
         {
-            //var lecturerID = HttpContext.Session.GetInt32("AccountID");
             var user = await _userManager.GetUserAsync(User);
             var lecturerID = user.Id;
 

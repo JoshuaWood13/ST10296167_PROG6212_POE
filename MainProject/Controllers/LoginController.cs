@@ -43,6 +43,7 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
+        // This method handles logging in a users, ensuring they enter a valid ID and password combination
         [HttpPost]
         public async Task<IActionResult> LoginUser(Login login)
         {

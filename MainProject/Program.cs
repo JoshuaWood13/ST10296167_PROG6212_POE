@@ -23,16 +23,10 @@ namespace ST10296167_PROG6212_POE
                 // No need to set a base address, we're using relative URIs in the service
             });
 
-           // builder.Services.AddHttpClient();
-
             builder.Services.AddScoped<ClaimApiService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            builder.Services.AddRazorPages();
-
-            //builder.Services.AddSession();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -46,8 +40,6 @@ namespace ST10296167_PROG6212_POE
              {
                     // Custom control, so no need for default redirect paths
              });
-
-            //builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -67,10 +59,6 @@ namespace ST10296167_PROG6212_POE
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseSession();
-
-            app.MapRazorPages();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -83,7 +71,6 @@ namespace ST10296167_PROG6212_POE
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                // Add roles if they don't exist
                 var roleNames = new[] { "Lecturer", "Programme Coordinator", "Academic Manager", "Human Resources" };
                 foreach (var roleName in roleNames)
                 {
@@ -94,7 +81,6 @@ namespace ST10296167_PROG6212_POE
                     }
                 }
 
-                // Seed default users if they don't exist
                 if (!dbContext.Users.Any())
                 {
                     // Create default users
@@ -146,7 +132,6 @@ namespace ST10296167_PROG6212_POE
                     var lecturerResult = await userManager.CreateAsync(lecturer, "Lecturer123!");
                     if (lecturerResult.Succeeded)
                     {
-                        // Directly add users to roles if user creation succeeded
                         await userManager.AddToRoleAsync(lecturer, "Lecturer");
                     }
                     else
@@ -186,44 +171,6 @@ namespace ST10296167_PROG6212_POE
 
                 }
             }
-
-
-
-
-
-            //Old seeding
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-            //    // Seed initial data
-            //    if (!dbContext.Lecturers.Any())
-            //    {
-            //        dbContext.Lecturers.Add(new Lecturers
-            //        {
-            //            Password = "Lecturer123"
-            //        });
-            //    }
-
-            //    if (!dbContext.ProgrammeCoordinators.Any())
-            //    {
-            //        dbContext.ProgrammeCoordinators.Add(new ProgrammeCoordinator
-            //        {
-            //            Password = "PM123"
-            //        });
-            //    }
-
-            //    if (!dbContext.AcademicManagers.Any())
-            //    {
-            //        dbContext.AcademicManagers.Add(new AcademicManager
-            //        {
-            //            Password = "AM123"
-            //        });
-            //    }
-
-            //    dbContext.SaveChanges(); 
-            //}
-
             app.Run();
         }
     }

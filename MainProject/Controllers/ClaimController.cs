@@ -96,7 +96,7 @@ namespace ST10296167_PROG6212_POE.Controllers
                 Description = model.Description
             };
 
-            // AUTO VAL HERE
+            // Auto verify
             var verifiedClaim = AutoVerify(claim);
 
             await _context.Claims.AddAsync(verifiedClaim);

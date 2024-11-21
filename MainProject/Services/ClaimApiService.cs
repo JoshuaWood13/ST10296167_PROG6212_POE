@@ -9,12 +9,18 @@ namespace ST10296167_PROG6212_POE.Services
         private readonly HttpClient _httpClient;
         private readonly string _baseUri;
 
+        //Controller 
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public ClaimApiService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _baseUri = configuration.GetValue<string>("ApiBaseUri");  // Get the base URI from appsettings
+            _baseUri = configuration.GetValue<string>("ApiBaseUri");  // Get the base URI from appsettings.json
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
 
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method handles calling the WebApi method "GetClaimsPC" and returning the content
         public async Task<SortedClaims> GetClaimsPCAsync()
         {
             var response = await _httpClient.GetAsync($"{_baseUri}/api/ClaimApi/GetClaimsPC");
@@ -30,6 +36,7 @@ namespace ST10296167_PROG6212_POE.Services
             }
         }
 
+        // This method handles calling the WebApi method "GetClaimsAM" and returning the content
         public async Task<SortedClaims> GetClaimsAMAsync()
         {
             var response = await _httpClient.GetAsync($"{_baseUri}/api/ClaimApi/GetClaimsAM");
@@ -44,7 +51,7 @@ namespace ST10296167_PROG6212_POE.Services
                 return new SortedClaims();
             }
         }
-
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
 //--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

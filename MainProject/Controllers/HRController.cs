@@ -11,11 +11,17 @@ namespace ST10296167_PROG6212_POE.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
 
+        // Controller
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public HRController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // Views
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult Dashboard()
         {
             return View();
@@ -31,7 +37,11 @@ namespace ST10296167_PROG6212_POE.Controllers
             var lecturer = _userManager.Users.FirstOrDefault(u => u.Id == id);
             return View(lecturer);
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
 
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method handles retrieving the required claims for a report based on the input filters
         [HttpPost]
         public async Task<IActionResult> GenerateReport(string month, int range)
         {
@@ -45,11 +55,11 @@ namespace ST10296167_PROG6212_POE.Controllers
 
             claimsQuery = range switch
             {
-                1 => claimsQuery.Where(c => c.ClaimAmount <= 10000),
-                2 => claimsQuery.Where(c => c.ClaimAmount > 10000 && c.ClaimAmount <= 20000),
-                3 => claimsQuery.Where(c => c.ClaimAmount > 20000 && c.ClaimAmount <= 30000),
-                4 => claimsQuery.Where(c => c.ClaimAmount > 30000),
-                _ => claimsQuery 
+                1 => claimsQuery.Where(c => c.ClaimAmount <= 20000),
+                2 => claimsQuery.Where(c => c.ClaimAmount > 20000 && c.ClaimAmount <= 40000),
+                3 => claimsQuery.Where(c => c.ClaimAmount > 40000 && c.ClaimAmount <= 60000),
+                4 => claimsQuery.Where(c => c.ClaimAmount > 60000),
+                _ => claimsQuery
             };
 
             var filteredClaims = await claimsQuery.ToListAsync();
@@ -75,6 +85,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             return View("Report", reportData);
         }
 
+        // This method handles finding the correct lecturer based on user input 
         [HttpPost]
         public async Task<IActionResult> Search(string lecturerID)
         {
@@ -94,6 +105,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             return RedirectToAction("LecturerData", new { id = user.Id });
         }
 
+        // This method handles updating the contact details of a lecturer
         [HttpPost]
         public async Task<IActionResult> UpdateLecturerData(User lecturer)
         {
@@ -136,6 +148,7 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return RedirectToAction("Dashboard", "HR");
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
 //--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//
