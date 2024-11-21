@@ -95,46 +95,4 @@
             </tbody>
         </table>
     }
- @*    <table>
-        <thead>
-            <tr>
-                <th>Claim ID</th>
-                <th>Claim Month</th>
-                <th>Claim Amount</th>
-                <th>View</th>
-                <th>Claim Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var claim in Model)
-            {
-                <tr>
-                    <td>@claim.ClaimID</td>
-                    <td>@claim.ClaimMonth</td>
-                    <td>R @claim.ClaimAmount.ToString("F2")</td>
-                    <td><a href="/Claim/FullClaimView/@claim.ClaimID">View Claim</a></td>
-                    <td>
-                        @{
-                            string firstLetter = claim.Status.Substring(0, 1).ToLower();
-                            string statusColour = "black"; 
-
-                            switch (firstLetter)
-                            {
-                                case "p":
-                                    statusColour = "orange"; 
-                                    break;
-                                case "r":
-                                    statusColour = "red"; 
-                                    break;
-                                case "a":
-                                    statusColour = "limegreen"; 
-                                    break;
-                            }
-                        }
-                        <span style="color:@statusColour">@claim.Status</span>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table> *@
 </body>

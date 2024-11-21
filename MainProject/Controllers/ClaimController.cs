@@ -37,46 +37,18 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
         public async Task<IActionResult> ViewClaims()
         {
-            //var lecturerID = HttpContext.Session.GetInt32("AccountID");
             var user = await _userManager.GetUserAsync(User);
             var lecturerID = user.Id;
-
-            //var user = await _userManager.GetUserAsync(User);
-            //var lecturerID = user.UserId;
 
             var claims = await _context.Claims.Where(c => c.LecturerID == lecturerID).ToListAsync();
             return View(claims);
         }
-         
-        //public async Task<IActionResult> VerifyClaims()
-        //{
-        //    var accountType = HttpContext.Session.GetString("AccountType");
-        //    IEnumerable<Claims> claims;
-
-        //    if (accountType == "Programme Coordinator")
-        //    {
-        //        claims = await _context.Claims.Where(c => c.ApprovalPC == 0).ToListAsync();
-        //    }
-        //    else if (accountType == "Academic Manager")
-        //    {
-        //        claims = await _context.Claims.Where(c => c.ApprovalPC == 1 && c.ApprovalAM == 0).ToListAsync();
-        //    }
-        //    else
-        //    {
-        //        claims = null;
-        //    }
-
-        //    return View(claims);
-        //}
+        
 
         public async Task<IActionResult> VerifyClaims()
         {
-            //var accountType = HttpContext.Session.GetString("AccountType");
-
             var accountType = new[] { "Academic Manager", "Programme Coordinator" }
             .FirstOrDefault(role => User.IsInRole(role));
-
-            //var verifiedClaims = await _claimApiService.GetVerifiedClaimsAsync();
 
             SortedClaims claims;
 
@@ -113,7 +85,6 @@ namespace ST10296167_PROG6212_POE.Controllers
             double amount = model.HourlyRate * model.HoursWorked;
             var user = await _userManager.GetUserAsync(User);
             var lecturerID = user.Id;
-            //var lecturerID = HttpContext.Session.GetInt32("AccountID");
 
             var claim = new Claims
             {
@@ -152,7 +123,6 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> ProcessClaim(int claimID, string action)
         {
-            //var account = HttpContext.Session.GetString("AccountType");
             var account = new[] { "Lecturer", "Academic Manager", "Programme Coordinator", "Human Resources" }
             .FirstOrDefault(role => User.IsInRole(role)) ?? "Unknown";
             var claim = await _context.Claims.FindAsync(claimID);

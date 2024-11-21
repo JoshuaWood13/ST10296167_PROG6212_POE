@@ -1,8 +1,6 @@
 ﻿// Name: Joshua Wood
 // Student number: ST10296167
 // Group: 2
-// References:
-// C# Corner. 2024. Restrict Uploaded File Size in ASP.NET Core, [Online]. Available at: https://www.c-sharpcorner.com/article/restrict-uploaded-file-size-in-asp-net-core2/ [Accessed 10 Oct. 2024].
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +36,6 @@ namespace ST10296167_PROG6212_POE.Controllers
         //------------------------------------------------------------------------------------------------------------------------------------------//
         // This method handles checking and uploading a valid file to a valid claim
         [HttpPost]
-      /*  [RequestSizeLimit(5000000)]*/ // Limit file size to 5 MB (C# Corner, 2024).
         public async Task<IActionResult> UploadDocs(Documents document, IFormFile File)
         {
             //var lecturerID = HttpContext.Session.GetInt32("AccountID");

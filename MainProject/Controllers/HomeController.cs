@@ -35,7 +35,6 @@ namespace ST10296167_PROG6212_POE.Controllers
             if (User.IsInRole("Human Resources"))
             {
                 return RedirectToAction("Dashboard", "HR");
-                //return RedirectToPage("/IndexHR");
             }
             var user = await _userManager.GetUserAsync(User);
             var userID = user.Id;

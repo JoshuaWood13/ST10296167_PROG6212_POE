@@ -32,38 +32,28 @@ namespace ST10296167_PROG6212_POE.Controllers
             return View(lecturer);
         }
 
-        // Action for handling "Generate Report" submission
         [HttpPost]
         public async Task<IActionResult> GenerateReport(string month, int range)
         {
             var claimsQuery = _context.Claims.AsQueryable();
             claimsQuery = claimsQuery.Where(c => c.ApprovalAM == 1 && c.ApprovalPC == 1);
 
-            // Filter by Month
             if (!string.IsNullOrEmpty(month) && month != "All")
             {
                 claimsQuery = claimsQuery.Where(c => c.ClaimMonth == month);
             }
 
-            // Filter by Range
             claimsQuery = range switch
             {
-                //1 => claimsQuery.Where(c => c.ClaimAmount < 5000),
-                //2 => claimsQuery.Where(c => c.ClaimAmount >= 5000 && c.ClaimAmount <= 20000),
-                //3 => claimsQuery.Where(c => c.ClaimAmount > 20000),
-                //_ => claimsQuery // No filtering
-
                 1 => claimsQuery.Where(c => c.ClaimAmount <= 10000),
                 2 => claimsQuery.Where(c => c.ClaimAmount > 10000 && c.ClaimAmount <= 20000),
                 3 => claimsQuery.Where(c => c.ClaimAmount > 20000 && c.ClaimAmount <= 30000),
                 4 => claimsQuery.Where(c => c.ClaimAmount > 30000),
-                _ => claimsQuery // No filtering
+                _ => claimsQuery 
             };
 
-            // Get the filtered claims
             var filteredClaims = await claimsQuery.ToListAsync();
 
-            // Calculate total and average claim amounts
             double totalAmount = filteredClaims.Sum(c => c.ClaimAmount);
             double totalClaims = filteredClaims.Count;
             double totalHours = filteredClaims.Sum(c => c.HoursWorked);
@@ -71,7 +61,6 @@ namespace ST10296167_PROG6212_POE.Controllers
             double averageHoursWorked = Math.Round(totalHours / totalClaims, 2);
             double averageHourlyRate = Math.Round(totalAmount / totalHours, 2);
 
-            // Pass the filtered claims and statistics to the Report view
             var reportData = new Report
             {
                 FilteredClaims = filteredClaims,
@@ -84,9 +73,6 @@ namespace ST10296167_PROG6212_POE.Controllers
             };
 
             return View("Report", reportData);
-            // Handle the report generation logic here
-
-            //return RedirectToAction("Report", new { month = month, range = range });
         }
 
         [HttpPost]
@@ -98,7 +84,7 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return View("Dashboard");
             }
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == lecturerID);
-            //var user = await _userManager.FindByIdAsync(lecturerID);
+
             if (user == null || !(await _userManager.IsInRoleAsync(user, "Lecturer")))
             {
                 TempData["ErrorMessage"] = "Lecturer could not be found.";
@@ -124,12 +110,6 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return View("LecturerData",existingUser);
             }
 
-            //Console.WriteLine($"Lecturer Data: {lecturer.FirstName} {lecturer.LastName}, Email: {lecturer.Email}, Phone: {lecturer.PhoneNumber}, Address: {lecturer.Address}");
-
-            //TempData["SuccessMessage"] = "Lecturer data updated successfully!";
-
-            //return RedirectToAction("Dashboard", "HR");
-
             var userToUpdate = await _userManager.FindByIdAsync(lecturer.Id);
             if (userToUpdate == null)
             {
@@ -137,13 +117,11 @@ namespace ST10296167_PROG6212_POE.Controllers
                 return RedirectToAction("Dashboard", "HR");
             }
 
-            // Update the user's properties
             userToUpdate.PhoneNumber = lecturer.PhoneNumber;
             userToUpdate.Email = lecturer.Email;
             userToUpdate.UserName = lecturer.Email;
             userToUpdate.Address = lecturer.Address;
 
-            // Save the changes to the user
             var result = await _userManager.UpdateAsync(userToUpdate);
 
             if (result.Succeeded)
@@ -160,3 +138,4 @@ namespace ST10296167_PROG6212_POE.Controllers
         }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

@@ -14,12 +14,6 @@ namespace ST10296167_PROG6212_POE.Data
 
         public DbSet<Claims> Claims { get; set; }
 
-        //public DbSet<Lecturers> Lecturers { get; set;}
-
-        //public DbSet<ProgrammeCoordinator> ProgrammeCoordinators { get; set; }
-
-        //public DbSet<AcademicManager> AcademicManagers { get; set;}
-
         public DbSet<Documents> Documents { get; set; }
 
     }

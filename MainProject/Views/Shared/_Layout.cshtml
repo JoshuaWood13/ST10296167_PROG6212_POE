@@ -33,9 +33,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
-                        @if (@* @Context.Session.GetInt32("IsLoggedIn") == 1 *@ User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            if (@* Context.Session.GetString("AccountType") == "Lecturer" *@ User.IsInRole("Lecturer"))
+                            if (User.IsInRole("Lecturer"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -53,7 +53,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                                 </li>
                             }
-                            else if (@* Context.Session.GetString("AccountType") == "Academic Manager" *@ User.IsInRole("Academic Manager"))
+                            else if (User.IsInRole("Academic Manager"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -65,7 +65,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                                 </li>
                             }
-                            else if (@* Context.Session.GetString("AccountType") == "Programme Coordinator" *@ User.IsInRole("Programme Coordinator"))
+                            else if (User.IsInRole("Programme Coordinator"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -79,9 +79,6 @@
                             }
                             else if (User.IsInRole("Human Resources"))
                             {
-                               @*  <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-page="/IndexHR">Dashboard</a>
-                                </li> *@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="HR" asp-action="Dashboard">Dashboard</a>
                                 </li>

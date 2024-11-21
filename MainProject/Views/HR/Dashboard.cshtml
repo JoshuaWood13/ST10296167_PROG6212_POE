@@ -34,7 +34,7 @@
         }
 
         .element {
-            flex: 1; /* Equal width for each section */
+            flex: 1; 
             padding: 5px;
         }
 
@@ -142,27 +142,12 @@
                 <input type="text" id="lecturerID" name="LecturerID" /> <br /> <br />
                 <button class="b2" id="searchButton" type="submit">Search</button>
             </form>
-            @* <label>Lecturer ID:</label> <br />
-            <input type="text" id="lecturerID"/> <br /> <br />
-            <button class="b2" id="searchButton">Search</button> *@
         </div>
     </div>
-@*     @if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger" id="alert">
-            @TempData["ErrorMessage"]
-        </div>
-    }
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success" id="alert">
-            @TempData["SuccessMessage"]
-        </div>
-    } *@
 </body>
 
 <script>
-    // Hide the alert after 3 seconds
+    // Hide alert after 3 seconds
     setTimeout(function () {
         var alert = document.getElementById('alert');
         if (alert) {
