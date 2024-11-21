@@ -48,9 +48,15 @@ namespace ST10296167_PROG6212_POE.Controllers
             // Filter by Range
             claimsQuery = range switch
             {
-                1 => claimsQuery.Where(c => c.ClaimAmount < 5000),
-                2 => claimsQuery.Where(c => c.ClaimAmount >= 5000 && c.ClaimAmount <= 20000),
-                3 => claimsQuery.Where(c => c.ClaimAmount > 20000),
+                //1 => claimsQuery.Where(c => c.ClaimAmount < 5000),
+                //2 => claimsQuery.Where(c => c.ClaimAmount >= 5000 && c.ClaimAmount <= 20000),
+                //3 => claimsQuery.Where(c => c.ClaimAmount > 20000),
+                //_ => claimsQuery // No filtering
+
+                1 => claimsQuery.Where(c => c.ClaimAmount <= 10000),
+                2 => claimsQuery.Where(c => c.ClaimAmount > 10000 && c.ClaimAmount <= 20000),
+                3 => claimsQuery.Where(c => c.ClaimAmount > 20000 && c.ClaimAmount <= 30000),
+                4 => claimsQuery.Where(c => c.ClaimAmount > 30000),
                 _ => claimsQuery // No filtering
             };
 
@@ -60,7 +66,7 @@ namespace ST10296167_PROG6212_POE.Controllers
             // Calculate total and average claim amounts
             double totalAmount = filteredClaims.Sum(c => c.ClaimAmount);
             double totalClaims = filteredClaims.Count;
-            double totalHours = filteredClaims.Sum(c => c.HourlyRate);
+            double totalHours = filteredClaims.Sum(c => c.HoursWorked);
             double averageClaimAmount = Math.Round(totalAmount / totalClaims, 2);
             double averageHoursWorked = Math.Round(totalHours / totalClaims, 2);
             double averageHourlyRate = Math.Round(totalAmount / totalHours, 2);
@@ -105,25 +111,9 @@ namespace ST10296167_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateLecturerData(User lecturer)
         {
-            Console.WriteLine($"Received Lecturer Data:");
-            Console.WriteLine($"ID: {lecturer.Id}");
-            Console.WriteLine($"FirstName: {lecturer.FirstName}");
-            Console.WriteLine($"LastName: {lecturer.LastName}");
-            Console.WriteLine($"Email: {lecturer.Email}");
-            Console.WriteLine($"Phone: {lecturer.PhoneNumber}");
-            Console.WriteLine($"Address: {lecturer.Address}");
 
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("Model State is Invalid");
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine($"Validation Error: {error.ErrorMessage}");
-                    }
-                }
-
                 var existingUser = await _userManager.FindByIdAsync(lecturer.Id);
                 if (existingUser == null)
                 {
@@ -131,7 +121,6 @@ namespace ST10296167_PROG6212_POE.Controllers
                     return RedirectToAction("Dashboard", "HR");
                 }
 
-                // If invalid, return the view with validation error messages
                 return View("LecturerData",existingUser);
             }
 
